@@ -1,0 +1,812 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mowbray Cemetery Board Candidate Directory</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --blue:#2F6FED;
+  --blue-dark:#1B3B6F;
+  --blue-mid:#2553B8;
+  --blue-tint:#EAF1FE;
+  --blue-tint-2:#F5F8FF;
+  --navy:#152A4E;
+  --green:#2FAE66;
+  --ink:#1D2939;
+  --gray:#5B6472;
+  --gray-light:#8A94A6;
+  --border:#E2E8F0;
+  --white:#FFFFFF;
+}
+*{box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+  margin:0;
+  background:var(--white);
+  color:var(--ink);
+  font-family:'Inter', -apple-system, sans-serif;
+  line-height:1.65;
+}
+h1,h2,h3,h4{
+  font-family:'Poppins', sans-serif;
+  font-weight:600;
+  margin:0;
+  color:var(--navy);
+}
+.mono{font-family:'Inter',sans-serif; font-variant-numeric:tabular-nums;}
+a{color:inherit;}
+img{max-width:100%;display:block;}
+.wrap{max-width:1160px; margin:0 auto; padding:0 28px;}
+@media (prefers-reduced-motion: reduce){
+  *{animation-duration:0.001ms !important; transition-duration:0.001ms !important;}
+}
+
+/* ---------- disclaimer ribbon ---------- */
+.disclaimer{
+  background:var(--navy);
+  color:#CFE0FF;
+  text-align:center;
+  font-size:13px;
+  padding:9px 16px;
+  font-weight:500;
+}
+.disclaimer strong{color:#fff;}
+
+/* ---------- nav ---------- */
+nav{
+  position:sticky; top:0; z-index:50;
+  background:rgba(255,255,255,0.92);
+  backdrop-filter:blur(6px);
+  border-bottom:1px solid var(--border);
+}
+.nav-inner{
+  max-width:1160px; margin:0 auto; padding:16px 28px;
+  display:flex; align-items:center; justify-content:space-between; gap:20px;
+}
+.brand{display:flex; align-items:center; gap:10px; font-family:'Poppins',sans-serif; font-weight:600; font-size:16px; color:var(--navy);}
+.brand .seal{width:30px;height:30px;flex:none;}
+.nav-links{display:flex; align-items:center; gap:26px; font-size:14.5px; font-weight:500;}
+.nav-links a{text-decoration:none; color:var(--gray); transition:color .2s;}
+.nav-links a:hover, .nav-links a:focus-visible{color:var(--blue);}
+.nav-links .btn{margin-left:4px;}
+.nav-toggle{display:none; background:none; border:1px solid var(--border); color:var(--navy); border-radius:6px; padding:7px 12px; font-family:'Inter',sans-serif; font-size:13px;}
+@media (max-width:820px){
+  .nav-links{position:absolute; top:100%; left:0; right:0; background:var(--white); flex-direction:column; align-items:flex-start; padding:18px 28px; border-bottom:1px solid var(--border); display:none; gap:16px;}
+  .nav-links.open{display:flex;}
+  .nav-toggle{display:block;}
+}
+
+/* ---------- buttons ---------- */
+.btn{
+  font-family:'Inter',sans-serif; font-size:14.5px; font-weight:600;
+  padding:13px 26px; border-radius:8px; text-decoration:none; cursor:pointer; border:1.5px solid transparent;
+  transition:transform .15s ease, background .2s ease, box-shadow .2s ease;
+  display:inline-flex; align-items:center; gap:8px;
+}
+.btn:hover{transform:translateY(-1px);}
+.btn-primary{background:var(--blue); color:#fff; box-shadow:0 6px 16px rgba(47,111,237,0.28);}
+.btn-primary:hover{background:var(--blue-mid);}
+.btn-outline{border-color:var(--border); color:var(--navy); background:#fff;}
+.btn-outline:hover{border-color:var(--blue); color:var(--blue);}
+.btn-sm{padding:9px 18px; font-size:13px;}
+
+/* ---------- hero ---------- */
+.hero{
+  padding:76px 0 60px;
+  background:linear-gradient(180deg, var(--blue-tint) 0%, #fff 100%);
+}
+.hero-inner{max-width:760px; margin:0 auto; text-align:center;}
+.hero-badge{
+  display:inline-flex; align-items:center; gap:8px; background:#fff; border:1px solid var(--border);
+  border-radius:30px; padding:7px 16px; font-size:13px; font-weight:600; color:var(--blue-mid); margin-bottom:24px;
+  box-shadow:0 2px 8px rgba(20,40,80,0.05);
+}
+.hero-badge .dot{width:7px;height:7px;border-radius:50%;background:var(--green);}
+.hero h1{font-size:clamp(32px,5vw,50px); line-height:1.15; color:var(--navy);}
+.hero h1 span{color:var(--blue);}
+.hero-sub{font-size:17px; color:var(--gray); max-width:560px; margin:18px auto 0;}
+.hero-ctas{display:flex; justify-content:center; gap:14px; margin-top:32px; flex-wrap:wrap;}
+
+.stat-row{
+  display:grid; grid-template-columns:repeat(3,1fr); gap:16px; max-width:820px; margin:52px auto 0;
+}
+@media (max-width:640px){.stat-row{grid-template-columns:1fr;}}
+.stat-card{
+  background:#fff; border:1px solid var(--border); border-radius:12px; padding:22px 18px; text-align:center;
+  box-shadow:0 4px 14px rgba(20,40,80,0.05);
+}
+.stat-card .num{font-family:'Poppins',sans-serif; font-size:28px; font-weight:700; color:var(--blue);}
+.stat-card .lbl{font-size:13px; color:var(--gray); margin-top:6px;}
+
+/* ---------- section shared ---------- */
+section{padding:76px 0;}
+.section-head{max-width:640px; margin-bottom:40px;}
+.section-head.center{margin-left:auto; margin-right:auto; text-align:center;}
+.eyebrow{
+  font-size:13px; font-weight:700; letter-spacing:0.04em; text-transform:uppercase;
+  color:var(--blue); margin-bottom:10px; display:block;
+}
+.section-head h2{font-size:clamp(24px,3vw,32px);}
+.section-head p{color:var(--gray); margin-top:12px; font-size:15.5px;}
+.section-alt{background:var(--blue-tint-2);}
+
+/* ---------- candidates ---------- */
+.ledger-toolbar{
+  display:flex; flex-wrap:wrap; gap:10px; margin-bottom:30px; align-items:center; justify-content:space-between;
+}
+.filter-tags{display:flex; flex-wrap:wrap; gap:8px;}
+.tag-btn{
+  font-size:13px; font-weight:600;
+  border:1.5px solid var(--border); background:#fff; color:var(--gray);
+  padding:8px 15px; border-radius:20px; cursor:pointer; transition:all .15s ease;
+}
+.tag-btn.active, .tag-btn:hover, .tag-btn:focus-visible{border-color:var(--blue); color:var(--blue); background:var(--blue-tint); outline:none;}
+.compare-hint{font-size:13px; color:var(--gray-light); font-weight:500;}
+
+.ledger-grid{display:grid; grid-template-columns:repeat(auto-fill, minmax(290px,1fr)); gap:18px;}
+
+.candidate-card{
+  background:#fff; border:1.5px solid var(--border); border-radius:14px; padding:22px;
+  transition:border-color .2s ease, box-shadow .2s ease, transform .2s ease;
+}
+.candidate-card:hover{border-color:var(--blue); box-shadow:0 10px 24px rgba(47,111,237,0.1); transform:translateY(-2px);}
+.candidate-top{display:flex; gap:14px; align-items:flex-start; margin-bottom:14px;}
+.avatar{
+  border-radius:50%; flex:none; overflow:hidden; display:block; background:#F1F3F6;
+}
+.avatar svg{display:block; width:100%; height:100%;}
+.candidate-name-wrap h3{font-size:16.5px; margin-bottom:2px;}
+.candidate-name-wrap .years{font-size:12.5px; color:var(--gray-light); font-weight:500;}
+.badge-num{
+  margin-left:auto; font-size:11px; font-weight:700; color:var(--blue); background:var(--blue-tint);
+  padding:4px 9px; border-radius:20px; white-space:nowrap;
+}
+.tagline{font-size:13.5px; color:var(--gray); font-style:italic; margin-bottom:12px;}
+.focus-tags{display:flex; flex-wrap:wrap; gap:6px; margin-bottom:14px;}
+.focus-tags span{
+  font-size:11px; font-weight:600;
+  background:#F1F3F6; color:var(--navy); padding:4px 10px; border-radius:20px;
+}
+.statement{font-size:13.5px; color:var(--gray); margin-bottom:8px;}
+.read-bio{
+  background:none; border:none; padding:0; margin-bottom:16px; display:inline-block;
+  font-size:13px; font-weight:700; color:var(--blue); cursor:pointer; font-family:'Inter',sans-serif;
+}
+.read-bio:hover, .read-bio:focus-visible{text-decoration:underline; outline:none;}
+.candidate-foot{display:flex; align-items:center; justify-content:space-between; border-top:1px solid var(--border); padding-top:14px;}
+.compare-check{
+  display:flex; align-items:center; gap:8px; font-size:12.5px; font-weight:600; color:var(--navy); cursor:pointer;
+  user-select:none;
+}
+.compare-check input{accent-color:var(--blue); width:16px; height:16px; cursor:pointer;}
+
+/* ---------- compare bar ---------- */
+.compare-bar{
+  position:fixed; left:50%; bottom:20px; transform:translate(-50%, 140%);
+  background:var(--navy); color:#fff; border:none;
+  border-radius:40px; padding:10px 10px 10px 22px; display:flex; align-items:center; gap:16px;
+  box-shadow:0 12px 30px rgba(0,0,0,0.25); z-index:60; transition:transform .3s ease;
+  font-size:13.5px;
+}
+.compare-bar.show{transform:translate(-50%, 0);}
+.compare-bar .btn-primary{padding:9px 18px;}
+.compare-bar .clear{background:none;border:none;color:#B9C6E0;opacity:0.9;cursor:pointer;font-family:inherit;font-size:12.5px;text-decoration:underline;}
+
+/* ---------- compare table ---------- */
+.compare-empty{color:var(--gray-light); font-size:14px; border:1.5px dashed var(--border); border-radius:12px; padding:30px; text-align:center; background:#fff;}
+.compare-table-wrap{overflow-x:auto; border:1px solid var(--border); border-radius:14px; background:#fff;}
+table.compare-table{border-collapse:collapse; width:100%; min-width:640px;}
+table.compare-table th, table.compare-table td{
+  text-align:left; padding:15px 18px; border-bottom:1px solid var(--border); vertical-align:top; font-size:14px;
+}
+table.compare-table th{font-size:11.5px; font-weight:700; letter-spacing:0.03em; text-transform:uppercase; color:var(--blue); background:var(--blue-tint-2); white-space:nowrap;}
+table.compare-table tr:last-child td{border-bottom:none;}
+table.compare-table td.row-label{font-size:11.5px; font-weight:700; letter-spacing:0.02em; text-transform:uppercase; color:var(--gray-light); background:#FAFBFD; white-space:nowrap;}
+table.compare-table td.name-cell{font-family:'Poppins',sans-serif; font-weight:600; font-size:15px; color:var(--navy); display:flex; align-items:center; gap:10px;}
+
+/* ---------- bio modal ---------- */
+.bio-overlay{
+  position:fixed; inset:0; background:rgba(21,42,78,0.55); z-index:100;
+  display:flex; align-items:center; justify-content:center; padding:24px;
+  opacity:0; pointer-events:none; transition:opacity .2s ease;
+}
+.bio-overlay.show{opacity:1; pointer-events:auto;}
+.bio-panel{
+  background:#fff; border-radius:18px; max-width:680px; width:100%; max-height:88vh; overflow-y:auto;
+  padding:36px; position:relative; box-shadow:0 30px 60px rgba(10,20,40,0.3);
+  transform:translateY(12px); transition:transform .2s ease;
+}
+.bio-overlay.show .bio-panel{transform:translateY(0);}
+.bio-close{
+  position:absolute; top:18px; right:18px; width:34px; height:34px; border-radius:50%;
+  background:#F1F3F6; border:none; color:var(--gray); font-size:18px; cursor:pointer;
+  display:flex; align-items:center; justify-content:center; transition:background .2s ease;
+}
+.bio-close:hover, .bio-close:focus-visible{background:var(--blue-tint); color:var(--blue); outline:none;}
+.bio-head{display:flex; gap:20px; align-items:flex-start; margin-bottom:22px;}
+.bio-portrait{width:96px; height:96px; flex:none;}
+.bio-head-text{padding-top:2px;}
+.bio-head-text h3{font-size:22px; margin-bottom:4px;}
+.bio-head-text .years{font-size:13px; color:var(--gray-light); font-weight:500; margin-bottom:8px;}
+.bio-head-text .tagline{margin:0; font-size:14.5px;}
+.bio-badge{
+  display:inline-block; margin-top:10px; font-size:11.5px; font-weight:700; color:var(--blue);
+  background:var(--blue-tint); padding:4px 10px; border-radius:20px;
+}
+.bio-focus-tags{display:flex; flex-wrap:wrap; gap:6px; margin-bottom:18px;}
+.bio-focus-tags span{font-size:11.5px; font-weight:600; background:#F1F3F6; color:var(--navy); padding:5px 11px; border-radius:20px;}
+.bio-section-label{font-size:12px; font-weight:700; text-transform:uppercase; letter-spacing:0.03em; color:var(--blue); margin-bottom:8px; margin-top:22px;}
+.bio-text{font-size:15px; color:var(--ink); margin:0;}
+.bio-exp-list{margin:0; padding-left:20px; font-size:14.5px; color:var(--gray);}
+.bio-exp-list li{margin-bottom:6px;}
+.bio-foot{display:flex; gap:12px; margin-top:28px; flex-wrap:wrap;}
+
+/* ---------- quiz ---------- */
+.quiz-card{
+  background:#fff; border:1px solid var(--border); border-radius:16px; padding:clamp(24px,4vw,44px); max-width:720px; margin:0 auto;
+  box-shadow:0 8px 24px rgba(20,40,80,0.06);
+}
+.quiz-progress{font-size:12.5px; font-weight:700; color:var(--blue); text-transform:uppercase; letter-spacing:0.03em; margin-bottom:14px;}
+.quiz-progress-bar{height:6px; background:var(--border); border-radius:10px; margin-bottom:22px; overflow:hidden;}
+.quiz-progress-fill{height:100%; background:var(--blue); border-radius:10px; transition:width .3s ease;}
+.quiz-q{font-family:'Poppins',sans-serif; font-size:20px; font-weight:600; color:var(--navy); margin-bottom:22px;}
+.quiz-options{display:grid; gap:10px;}
+.quiz-opt{
+  text-align:left; border:1.5px solid var(--border); background:#fff; border-radius:10px; padding:15px 18px;
+  font-family:'Inter',sans-serif; font-size:14.5px; color:var(--ink); cursor:pointer; transition:all .15s ease;
+}
+.quiz-opt:hover, .quiz-opt:focus-visible{border-color:var(--blue); background:var(--blue-tint); outline:none;}
+.quiz-nav{display:flex; justify-content:space-between; margin-top:24px; align-items:center;}
+.quiz-back{font-size:13px; color:var(--gray); background:none; border:none; cursor:pointer; text-decoration:underline; font-weight:600;}
+.quiz-back:disabled{opacity:0.3; cursor:default; text-decoration:none;}
+.quiz-result h3{font-size:13px; font-weight:700; text-transform:uppercase; letter-spacing:0.03em; color:var(--blue); margin-bottom:18px;}
+.quiz-result-list{display:grid; gap:12px;}
+.quiz-result-card{
+  display:flex; justify-content:space-between; align-items:center; gap:14px;
+  border:1.5px solid var(--border); border-radius:12px; padding:16px 18px; background:#fff;
+}
+.quiz-result-card .name{font-family:'Poppins',sans-serif; font-weight:600; font-size:16px; color:var(--navy);}
+.quiz-result-card .match{font-size:12px; font-weight:700; color:var(--blue); background:var(--blue-tint); padding:5px 10px; border-radius:20px;}
+.quiz-restart{margin-top:22px;}
+
+/* ---------- footer ---------- */
+footer{background:var(--navy); padding:52px 0 30px; color:#B9C6E0;}
+.footer-grid{display:flex; justify-content:space-between; flex-wrap:wrap; gap:32px; border-bottom:1px solid rgba(255,255,255,0.12); padding-bottom:32px; margin-bottom:22px;}
+.footer-grid h4{font-size:13px; font-weight:700; text-transform:uppercase; letter-spacing:0.04em; color:#fff; margin-bottom:14px;}
+.footer-grid p, .footer-grid a{font-size:13.5px; color:#B9C6E0; text-decoration:none; display:block; margin-bottom:7px;}
+.footer-grid a:hover{color:#fff;}
+.footer-bottom{font-size:12.5px; opacity:0.7; display:flex; justify-content:space-between; flex-wrap:wrap; gap:10px;}
+</style>
+</head>
+<body>
+
+<div class="disclaimer">Sample Template Preview — <strong>Candidate details are placeholders</strong> for software structure demonstration</div>
+
+<nav>
+  <div class="nav-inner">
+    <div class="brand">
+      <svg class="seal" viewBox="0 0 40 40" fill="none"><circle cx="20" cy="20" r="19" fill="#2F6FED"/><path d="M13 20.5L17.5 25L27 14.5" stroke="white" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      Mowbray Candidate Hub
+    </div>
+    <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">☰ Menu</button>
+    <div class="nav-links" id="navLinks">
+      <a href="#about">About</a>
+      <a href="#candidates">Candidates</a>
+      <a href="#compare">Compare</a>
+      <a href="#quiz">Find Candidate</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="hero-inner">
+      <div class="hero-badge"><span class="dot"></span> Shortlist Active · Candidate Roster</div>
+      <h1>Shortlisted Candidates for the <span>Mowbray Cemetery Board</span></h1>
+      <p class="hero-sub">24 candidates are standing for 11 available seats on the board. Explore focus areas, view biographies, and construct a side-by-side comparison table.</p>
+      <div class="hero-ctas">
+        <a href="#candidates" class="btn btn-primary">Browse 24 Nominees</a>
+        <a href="#quiz" class="btn btn-outline">Match Priorities</a>
+      </div>
+      <div class="stat-row">
+        <div class="stat-card"><div class="num">24</div><div class="lbl">Shortlisted Candidates</div></div>
+        <div class="stat-card"><div class="num">11</div><div class="lbl">Seats Open</div></div>
+        <div class="stat-card"><div class="num mono">[Active Term]</div><div class="lbl">Election Cycle</div></div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<section class="section-alt" id="about">
+  <div class="wrap">
+    <div class="section-head center" style="max-width:720px;">
+      <span class="eyebrow">About the Board</span>
+      <h2>Community Board Governance</h2>
+      <p>The Mowbray Cemetery Board is the governing body responsible for the oversight, maintenance, and records management of the cemetery grounds. Eleven elected members serve three-year terms to set policy, allocate budgets, and ensure transparent operation.</p>
+    </div>
+  </div>
+</section>
+
+<section id="candidates">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Candidate Roster</span>
+      <h2>24 Candidates, 11 Seats</h2>
+      <p>Filter candidates by priority area or select up to 4 to compare side by side.</p>
+    </div>
+    <div class="ledger-toolbar">
+      <div class="filter-tags" id="filterTags"></div>
+      <div class="compare-hint" id="compareHint">Select up to 4 to compare →</div>
+    </div>
+    <div class="ledger-grid" id="ledgerGrid"></div>
+  </div>
+</section>
+
+<section class="section-alt" id="compare">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Comparison Matrix</span>
+      <h2>Side-by-Side Candidate Evaluation</h2>
+      <p>Select candidates from the roster using "Add to compare" to evaluate focus areas and experience.</p>
+    </div>
+    <div id="compareArea" aria-live="polite"><div class="compare-empty">No candidates selected yet. Add up to 4 from the shortlist above to compare them here.</div></div>
+  </div>
+</section>
+
+<section id="quiz">
+  <div class="wrap">
+    <div class="section-head center">
+      <span class="eyebrow">Priority Matcher</span>
+      <h2>Answer Four Priority Questions</h2>
+      <p>Match your focus areas against candidate platform statements.</p>
+    </div>
+    <div class="quiz-card" id="quizCard"></div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <h4>Mowbray Cemetery Board Hub</h4>
+        <p style="max-width:280px;">Independent candidate information hub. Candidate profiles are placeholder data for software structure demonstration.</p>
+      </div>
+      <div>
+        <h4>Directory</h4>
+        <a href="#candidates">Candidates</a>
+        <a href="#compare">Compare Table</a>
+        <a href="#quiz">Priority Matcher</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© Mowbray Candidate Information System</span>
+      <span>System Preview Build</span>
+    </div>
+  </div>
+</footer>
+
+<div class="compare-bar" id="compareBar" aria-live="polite">
+  <span id="compareCount" class="mono">0 selected</span>
+  <a href="#compare" class="btn btn-primary">View Comparison</a>
+  <button class="clear" id="clearCompare">Clear</button>
+</div>
+
+<div class="bio-overlay" id="bioOverlay" role="dialog" aria-modal="true" aria-labelledby="bioName">
+  <div class="bio-panel" id="bioPanel"></div>
+</div>
+
+<script>
+/* ================= DATA ================= */
+const FOCUS_AREAS = ["Heritage preservation","Financial transparency","Grounds & maintenance","Community engagement","Records digitisation"];
+
+const SKIN_TONES = ["#F1C27D","#E0AC69","#C68642","#8D5524","#FFDBAC","#A66E4E"];
+const HAIR_COLORS = ["#2B1B0E","#4A2E1A","#6B4423","#1B1B1B","#8B5E3C","#D4A017","#3B2F2F"];
+const BG_TINTS = ["#E9F0FF","#E6F9EF","#FFF3E0","#FDEAF0","#EFEBFF","#E0F7FA"];
+const HAIR_STYLES = ["bald","short","curly","bun","swoop"];
+const HIJAB_IDS = [7,17,21];
+
+function avatarSVG(id){
+  const skin = SKIN_TONES[(id*7)%SKIN_TONES.length];
+  const hairColor = HAIR_COLORS[(id*3)%HAIR_COLORS.length];
+  const bg = BG_TINTS[id % BG_TINTS.length];
+  const isHijab = HIJAB_IDS.includes(id);
+  const style = isHijab ? 'hijab' : HAIR_STYLES[id % HAIR_STYLES.length];
+  const glasses = (id % 4 === 0);
+
+  let hairBehind = '', hairFront = '';
+  if(style === 'hijab'){
+    hairBehind = `<path d="M14 86 Q8 28 50 14 Q92 28 86 86 Q86 58 74 44 Q80 66 70 88 L30 88 Q20 66 26 44 Q14 58 14 86 Z" fill="${hairColor}"/>`;
+    hairFront = `<path d="M25 46 Q30 24 50 22 Q70 24 75 46 Q70 36 50 36 Q30 36 25 46 Z" fill="${hairColor}"/>`;
+  } else if(style === 'short'){
+    hairFront = `<path d="M22 46 Q26 20 50 20 Q74 20 78 46 Q74 34 50 34 Q26 34 22 46 Z" fill="${hairColor}"/>`;
+  } else if(style === 'curly'){
+    hairFront = `<circle cx="30" cy="34" r="9" fill="${hairColor}"/><circle cx="42" cy="25" r="10" fill="${hairColor}"/><circle cx="58" cy="25" r="10" fill="${hairColor}"/><circle cx="70" cy="34" r="9" fill="${hairColor}"/><circle cx="50" cy="21" r="10" fill="${hairColor}"/>`;
+  } else if(style === 'bun'){
+    hairFront = `<path d="M24 44 Q28 22 50 22 Q72 22 76 44 Q70 32 50 32 Q30 32 24 44 Z" fill="${hairColor}"/><circle cx="50" cy="13" r="8" fill="${hairColor}"/>`;
+  } else if(style === 'swoop'){
+    hairFront = `<path d="M22 42 Q24 18 52 19 Q76 20 78 42 Q68 25 48 26 Q30 27 22 42 Z" fill="${hairColor}"/>`;
+  }
+
+  const glassesShape = glasses ? `<g stroke="#33363B" stroke-width="2.2" fill="none"><rect x="34" y="49" width="15" height="11" rx="3"/><rect x="51" y="49" width="15" height="11" rx="3"/><line x1="49" y1="54" x2="51" y2="54"/></g>` : '';
+
+  return `<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Candidate avatar">
+    <circle cx="50" cy="50" r="50" fill="${bg}"/>
+    ${style==='hijab' ? hairBehind : ''}
+    <circle cx="50" cy="58" r="26" fill="${skin}"/>
+    ${style!=='hijab' ? hairFront : ''}
+    <circle cx="41" cy="55" r="2.4" fill="#2b2b2b"/>
+    <circle cx="59" cy="55" r="2.4" fill="#2b2b2b"/>
+    <path d="M42 67 Q50 73 58 67" stroke="#2b2b2b" stroke-width="2.2" fill="none" stroke-linecap="round"/>
+    ${glassesShape}
+    ${style==='hijab' ? hairFront : ''}
+  </svg>`;
+}
+
+function avatarHTML(id, sizePx){
+  return `<div class="avatar" style="width:${sizePx}px;height:${sizePx}px;">${avatarSVG(id)}</div>`;
+}
+
+const CANDIDATES = [
+  {id:1, name:"Thandiwe Nkosi", tagline:"Restore the old graves, and the trust that goes with them.", years:"11 yrs in Mowbray", tags:["Heritage preservation","Community engagement"], statement:"Wants a dedicated restoration fund for pre-1950 graves and quarterly open reporting.", bio:"Thandiwe has spent five years documenting older graves and advocates for structured restoration budgeting alongside transparent project logs.", experience:["Chaired local heritage group, 2019–2024","Led grave-restoration fundraising drives","Background in conservation architecture"]},
+  {id:2, name:"Ismail Adams", tagline:"Every rand accounted for, published for anyone to check.", years:"22 yrs in Mowbray", tags:["Financial transparency","Records digitisation"], statement:"Proposes an annual public budget review and a searchable online burial register.", bio:"As a chartered accountant, Ismail emphasizes plain-language public financial reports and online access to burial registers.", experience:["Chartered accountant, 18 years","Treasurer, Ratepayers Association","Built digital rates portal"]},
+  {id:3, name:"Patricia van Wyk", tagline:"Well-kept grounds are how we show respect.", years:"8 yrs in Mowbray", tags:["Grounds & maintenance","Community engagement"], statement:"Wants a rotating volunteer grounds programme and better drainage on the lower terraces.", bio:"A landscape gardener who organizes volunteer clean-ups, focusing on terrace drainage improvements and issue logging tools.", experience:["Landscape gardener, 15 years","Organizes community clean-up days","Body corporate committee experience"]},
+  {id:4, name:"Sipho Dlamini", tagline:"Records that families can actually find.", years:"6 yrs in Mowbray", tags:["Records digitisation","Financial transparency"], statement:"Priority is digitising all pre-1990 burial records within his first term.", bio:"IT project manager experienced in archive digitisation, advocating for secure cloud record access and data protection standards.", experience:["IT project manager","Archives digitisation volunteer","Data protection certified"]},
+  {id:5, name:"Margaret Petersen", tagline:"A board should answer to its community.", years:"31 yrs in Mowbray", tags:["Community engagement","Heritage preservation"], statement:"Proposes moving board meetings to evenings and publishing minutes within 48 hours.", bio:"Longstanding resident who advocates for open evening board meetings and rapid release of meeting documentation.", experience:["Long-serving local resident","Former governing body chair","Oral history project founder"]},
+  {id:6, name:"Daniel Botha", tagline:"Fix the fence, the paths, and the drainage — in order.", years:"14 yrs in Mowbray", tags:["Grounds & maintenance","Financial transparency"], statement:"Wants a costed three-year maintenance plan instead of year-to-year patch repairs.", bio:"Civil engineer focused on multi-year infrastructure planning for perimeter fencing, drainage, and visitor pathways.", experience:["Civil engineer","Managed infrastructure tenders","Ward safety forum member"]},
+  {id:7, name:"Fatima Essop", tagline:"Preserve every faith's section with equal care.", years:"19 yrs in Mowbray", tags:["Heritage preservation","Grounds & maintenance"], statement:"Wants equal maintenance budgets for each of the cemetery's denominational sections.", bio:"Interfaith liaison focusing on balanced allocation of grounds maintenance across all denominational sections.", experience:["Interfaith liaison officer","Burial committee member","Grant-writing experience"]},
+  {id:8, name:"Robert Naidoo", tagline:"Modernise how families interact with the board.", years:"5 yrs in Mowbray", tags:["Records digitisation","Community engagement"], statement:"Wants an online plot-enquiry system so families don't need to visit in person.", bio:"Product manager advocating for digital plot lookup tools and direct online service requests for families.", experience:["Civic tech product manager","Built community web tools","New to board service"]},
+  {id:9, name:"Elaine Fortuin", tagline:"Transparency starts with plain-language reporting.", years:"9 yrs in Mowbray", tags:["Financial transparency","Community engagement"], statement:"Wants annual reports rewritten in plain language, with a public Q&A after.", bio:"Communications consultant proposing plain-language financial reports and structured public Q&A sessions.", experience:["Communications consultant","Newsletter editor","Public participation facilitator"]},
+  {id:10, name:"George Adonis", tagline:"The grounds should be as dignified as what they hold.", years:"27 yrs in Mowbray", tags:["Grounds & maintenance","Heritage preservation"], statement:"Focus is restoring the original wrought-iron gates and historic pathways.", bio:"Retired stonemason advocating for traditional masonry restoration techniques on boundary structures and historic walkways.", experience:["Retired stonemason","Volunteer groundskeeper 10 years","Heritage restoration advisor"]},
+  {id:11, name:"Nomvula Khumalo", tagline:"Bring younger families into how the cemetery is run.", years:"4 yrs in Mowbray", tags:["Community engagement","Records digitisation"], statement:"Wants a resident advisory panel and SMS notifications for board decisions.", bio:"Community organizer advocating for resident advisory panels and digital notification channels.", experience:["Community organizer","Parents network coordinator","Digital literacy volunteer"]},
+  {id:12, name:"Craig Meyer", tagline:"Spend wisely, maintain relentlessly.", years:"13 yrs in Mowbray", tags:["Grounds & maintenance","Financial transparency"], statement:"Wants maintenance spend benchmarked against similar cemeteries each year.", bio:"Facilities manager emphasizing maintenance cost benchmarking and transparent reporting against regional metrics.", experience:["Facilities manager","Finance committee member"]},
+  {id:13, name:"Yolanda Cupido", tagline:"Every headstone tells a Mowbray story.", years:"16 yrs in Mowbray", tags:["Heritage preservation","Community engagement"], statement:"Wants a community storytelling project documenting notable graves.", bio:"Local historian advocating for educational historical documentation of cemetery markers.", experience:["Local historian","Walking tour organizer"]},
+  {id:14, name:"Ashraf Gamieldien", tagline:"Digitise once, serve families forever.", years:"7 yrs in Mowbray", tags:["Records digitisation","Grounds & maintenance"], statement:"Wants burial records and plot maps combined into one searchable system.", bio:"GIS analyst focusing on integrating paper burial registers with digital spatial maps.", experience:["GIS analyst","Municipal mapping volunteer"]},
+  {id:15, name:"Beverly Jansen", tagline:"Ask residents before you spend, not after.", years:"20 yrs in Mowbray", tags:["Community engagement","Financial transparency"], statement:"Wants resident input sessions before any major budget item is approved.", bio:"Public participation coordinator proposing resident consultation steps prior to major capital expenditure.", experience:["Former ward committee member","Workshop facilitator"]},
+  {id:16, name:"Trevor Abrahams", tagline:"Protect the old oaks along with the old graves.", years:"24 yrs in Mowbray", tags:["Grounds & maintenance","Heritage preservation"], statement:"Wants an arborist survey to protect the cemetery's heritage trees.", bio:"Arborist focusing on health assessments and preservation plans for grounds vegetation and mature trees.", experience:["Retired parks supervisor","Certified arborist"]},
+  {id:17, name:"Nasreen Parker", tagline:"Numbers the community can actually verify.", years:"10 yrs in Mowbray", tags:["Financial transparency","Records digitisation"], statement:"Wants the annual financial statements published as open data.", bio:"Auditor advocating for machine-readable financial disclosures and open data access for residents.", experience:["Auditor, 12 years","Data governance specialist"]},
+  {id:18, name:"Clive Fortune", tagline:"Repair what's original before replacing anything.", years:"29 yrs in Mowbray", tags:["Heritage preservation","Grounds & maintenance"], statement:"Wants a conservation-first policy for all historic structures on site.", bio:"Heritage conservator proposing conservation-first maintenance guidelines for original stonework and gates.", experience:["Retired heritage conservator","Restoration project advisor"]},
+  {id:19, name:"Zanele Mbeki", tagline:"Meet families where they already are — online.", years:"5 yrs in Mowbray", tags:["Community engagement","Records digitisation"], statement:"Wants a simple mobile-friendly portal for plot enquiries and notices.", bio:"UX designer prioritizing accessible mobile layout design for public notices and plot inquiries.", experience:["UX designer","Tech literacy volunteer"]},
+  {id:20, name:"Andre Human", tagline:"Maintenance budgets should be boringly predictable.", years:"18 yrs in Mowbray", tags:["Financial transparency","Grounds & maintenance"], statement:"Wants a ring-fenced maintenance reserve reviewed publicly each year.", bio:"Financial manager focusing on ring-fenced reserve funds to prevent deferred grounds maintenance.", experience:["Financial manager","Residents association treasurer"]},
+  {id:21, name:"Farieda Salie", tagline:"Heritage means nothing without a community around it.", years:"15 yrs in Mowbray", tags:["Heritage preservation","Community engagement"], statement:"Wants an annual heritage open day run with local schools.", bio:"Museum education officer proposing educational outreach programs and annual open days.", experience:["Museum education officer","Community event organizer"]},
+  {id:22, name:"Brian O'Connell", tagline:"If it's not written down, it doesn't exist.", years:"9 yrs in Mowbray", tags:["Records digitisation","Financial transparency"], statement:"Wants every board decision and expense logged in a public register.", bio:"Records management consultant proposing searchable digital decision logs for board resolutions.", experience:["Records management consultant","Local government compliance"]},
+  {id:23, name:"Portia Sithole", tagline:"Grounds work should involve the ground's neighbours.", years:"12 yrs in Mowbray", tags:["Grounds & maintenance","Community engagement"], statement:"Wants a resident volunteer roster for seasonal grounds days.", bio:"Community garden lead advocating for structured seasonal grounds maintenance volunteer days.", experience:["Community garden coordinator","Clean-up organizer"]},
+  {id:24, name:"Werner Kruger", tagline:"Protect the past without bankrupting the present.", years:"26 yrs in Mowbray", tags:["Heritage preservation","Financial transparency"], statement:"Wants heritage restoration costed and phased over multiple budget years.", bio:"Quantity surveyor proposing phased multi-year cost plans for historic structure restoration.", experience:["Quantity surveyor","Heritage project advisor"]}
+];
+
+const QUESTIONS = [
+  {q:"What matters most to you about the cemetery grounds?", opts:[
+    {label:"That old and historic graves are properly restored", tag:"Heritage preservation"},
+    {label:"That the board's spending is open for anyone to see", tag:"Financial transparency"},
+    {label:"That the paths, fences and lawns are well kept", tag:"Grounds & maintenance"},
+  ]},
+  {q:"How should the board communicate with residents?", opts:[
+    {label:"Hold more open meetings and listening sessions", tag:"Community engagement"},
+    {label:"Publish clear, plain-language financial reports", tag:"Financial transparency"},
+    {label:"Put records and updates online, easy to search", tag:"Records digitisation"},
+  ]},
+  {q:"If the board had one term to fix something, it should be:", opts:[
+    {label:"Restoring neglected heritage sections", tag:"Heritage preservation"},
+    {label:"Fixing drainage, paths and general upkeep", tag:"Grounds & maintenance"},
+    {label:"Digitising old paper burial records", tag:"Records digitisation"},
+  ]},
+  {q:"What background do you value most in a board candidate?", opts:[
+    {label:"Community engagement and advocacy experience", tag:"Community engagement"},
+    {label:"Hands-on maintenance or engineering expertise", tag:"Grounds & maintenance"},
+    {label:"Financial accounting or technology background", tag:"Financial transparency"},
+  ]}
+];
+
+/* ================= STATE & URL SYNC ================= */
+let activeFilter = null;
+let selected = new Set();
+let quizIndex = 0;
+let quizScores = {};
+
+function syncStateToURL(){
+  const params = new URLSearchParams(window.location.search);
+  if(activeFilter){ params.set('filter', activeFilter); } else { params.delete('filter'); }
+  if(selected.size > 0){ params.set('compare', Array.from(selected).join(',')); } else { params.delete('compare'); }
+  const newUrl = window.location.pathname + (params.toString() ? '?' + params.toString() : '') + window.location.hash;
+  window.history.replaceState({}, '', newUrl);
+}
+
+function loadStateFromURL(){
+  const params = new URLSearchParams(window.location.search);
+  const f = params.get('filter');
+  if(f && FOCUS_AREAS.includes(f)){ activeFilter = f; }
+  const c = params.get('compare');
+  if(c){
+    c.split(',').forEach(idStr=>{
+      const id = Number(idStr);
+      if(!isNaN(id) && CANDIDATES.some(cand=>cand.id===id) && selected.size < 4){
+        selected.add(id);
+      }
+    });
+  }
+}
+
+/* ================= NAV ================= */
+document.getElementById('navToggle').addEventListener('click', ()=>{
+  document.getElementById('navLinks').classList.toggle('open');
+});
+document.querySelectorAll('.nav-links a').forEach(a=>a.addEventListener('click', ()=>{
+  document.getElementById('navLinks').classList.remove('open');
+}));
+
+/* ================= FILTER TAGS ================= */
+function renderFilterTags(){
+  const wrap = document.getElementById('filterTags');
+  wrap.innerHTML = '';
+  const allBtn = document.createElement('button');
+  allBtn.className = 'tag-btn' + (activeFilter===null ? ' active':'');
+  allBtn.textContent = 'All Priorities (24)';
+  allBtn.onclick = ()=>{ activeFilter=null; syncStateToURL(); renderFilterTags(); renderLedger(); };
+  wrap.appendChild(allBtn);
+  
+  FOCUS_AREAS.forEach(tag=>{
+    const count = CANDIDATES.filter(c=>c.tags.includes(tag)).length;
+    const b = document.createElement('button');
+    b.className = 'tag-btn' + (activeFilter===tag ? ' active':'');
+    b.textContent = `${tag} (${count})`;
+    b.onclick = ()=>{ activeFilter = (activeFilter===tag ? null : tag); syncStateToURL(); renderFilterTags(); renderLedger(); };
+    wrap.appendChild(b);
+  });
+}
+
+/* ================= CANDIDATE GRID ================= */
+function renderLedger(){
+  const grid = document.getElementById('ledgerGrid');
+  grid.innerHTML = '';
+  const list = CANDIDATES.filter(c => !activeFilter || c.tags.includes(activeFilter));
+  
+  list.forEach(c=>{
+    const el = document.createElement('article');
+    el.className = 'candidate-card';
+    el.innerHTML = `
+      <div class="candidate-top">
+        ${avatarHTML(c.id, 48)}
+        <div class="candidate-name-wrap">
+          <h3>${escapeHTML(c.name)}</h3>
+          <div class="years">${escapeHTML(c.years)}</div>
+        </div>
+        <span class="badge-num">#${String(c.id).padStart(2,'0')}</span>
+      </div>
+      <div class="tagline">${escapeHTML(c.tagline)}</div>
+      <div class="focus-tags">${c.tags.map(t=>`<span>${escapeHTML(t)}</span>`).join('')}</div>
+      <p class="statement">${escapeHTML(c.statement)}</p>
+      <button type="button" class="read-bio" data-bio-id="${c.id}">Read biography →</button>
+      <div class="candidate-foot">
+        <label class="compare-check">
+          <input type="checkbox" data-id="${c.id}" ${selected.has(c.id)?'checked':''}/>
+          Add to compare
+        </label>
+      </div>
+    `;
+    grid.appendChild(el);
+  });
+
+  grid.querySelectorAll('input[type=checkbox]').forEach(cb=>{
+    cb.addEventListener('change', (e)=>{
+      const id = Number(e.target.dataset.id);
+      if(e.target.checked){
+        if(selected.size >= 4){ e.target.checked = false; return; }
+        selected.add(id);
+      } else {
+        selected.delete(id);
+      }
+      syncStateToURL();
+      updateCompareBar();
+      renderCompareTable();
+    });
+  });
+
+  grid.querySelectorAll('.read-bio').forEach(btn=>{
+    btn.addEventListener('click', ()=> openBioModal(Number(btn.dataset.bioId)));
+  });
+}
+
+function escapeHTML(str){
+  return String(str).replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
+}
+
+/* ================= COMPARE ================= */
+function updateCompareBar(){
+  const bar = document.getElementById('compareBar');
+  document.getElementById('compareCount').textContent = selected.size + ' selected';
+  if(selected.size > 0){ bar.classList.add('show'); } else { bar.classList.remove('show'); }
+}
+
+document.getElementById('clearCompare').addEventListener('click', ()=>{
+  selected.clear();
+  syncStateToURL();
+  updateCompareBar();
+  renderLedger();
+  renderCompareTable();
+});
+
+function renderCompareTable(){
+  const area = document.getElementById('compareArea');
+  if(selected.size === 0){
+    area.innerHTML = '<div class="compare-empty">No candidates selected yet. Add up to 4 from the shortlist above to compare them here.</div>';
+    return;
+  }
+  const chosen = CANDIDATES.filter(c=>selected.has(c.id));
+  const rows = [
+    {label:'Years in Mowbray', get:c=>escapeHTML(c.years)},
+    {label:'Focus areas', get:c=>c.tags.map(escapeHTML).join(', ')},
+    {label:'Statement', get:c=>escapeHTML(c.statement)},
+    {label:'Experience', get:c=>'<ul style="margin:0;padding-left:18px;">'+c.experience.map(x=>`<li>${escapeHTML(x)}</li>`).join('')+'</ul>'},
+  ];
+  let html = '<div class="compare-table-wrap"><table class="compare-table"><thead><tr><th>Field</th>';
+  chosen.forEach(c=> html += `<th>#${String(c.id).padStart(2,'0')}</th>`);
+  html += '</tr></thead><tbody>';
+  html += '<tr><td class="row-label">Name</td>' + chosen.map(c=>`<td class="name-cell">${avatarHTML(c.id,32)}${escapeHTML(c.name)}</td>`).join('') + '</tr>';
+  rows.forEach(r=>{
+    html += `<tr><td class="row-label">${r.label}</td>` + chosen.map(c=>`<td>${r.get(c)}</td>`).join('') + '</tr>';
+  });
+  html += '</tbody></table></div>';
+  area.innerHTML = html;
+}
+
+/* ================= QUIZ ================= */
+function renderQuiz(){
+  const card = document.getElementById('quizCard');
+  if(quizIndex >= QUESTIONS.length){
+    renderQuizResult(card);
+    return;
+  }
+  const q = QUESTIONS[quizIndex];
+  const pct = Math.round((quizIndex/QUESTIONS.length)*100);
+  card.innerHTML = `
+    <div class="quiz-progress">Question ${quizIndex+1} of ${QUESTIONS.length}</div>
+    <div class="quiz-progress-bar"><div class="quiz-progress-fill" style="width:${pct}%"></div></div>
+    <div class="quiz-q">${escapeHTML(q.q)}</div>
+    <div class="quiz-options">
+      ${q.opts.map((o,i)=>`<button class="quiz-opt" data-tag="${escapeHTML(o.tag)}">${escapeHTML(o.label)}</button>`).join('')}
+    </div>
+    <div class="quiz-nav">
+      <button class="quiz-back" id="quizBack" ${quizIndex===0?'disabled':''}>← Back</button>
+      <span style="font-size:11.5px;color:var(--gray-light);">No personal data collected</span>
+    </div>
+  `;
+  card.querySelectorAll('.quiz-opt').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      const tag = btn.dataset.tag;
+      quizScores[tag] = (quizScores[tag]||0) + 1;
+      quizIndex++;
+      renderQuiz();
+    });
+  });
+  const back = document.getElementById('quizBack');
+  if(back) back.addEventListener('click', ()=>{ if(quizIndex>0){ quizIndex--; renderQuiz(); } });
+}
+
+function renderQuizResult(card){
+  const topTags = Object.entries(quizScores).sort((a,b)=>b[1]-a[1]).map(x=>x[0]);
+  const scored = CANDIDATES.map(c=>{
+    let score = 0;
+    c.tags.forEach(t=>{ const idx = topTags.indexOf(t); if(idx>=0) score += (topTags.length - idx); });
+    return {c, score};
+  }).sort((a,b)=>b.score-a.score).slice(0,3);
+
+  card.innerHTML = `
+    <div class="quiz-result">
+      <h3>Matched Candidates</h3>
+      <div class="quiz-result-list">
+        ${scored.map(s=>`
+          <div class="quiz-result-card">
+            <div style="display:flex;align-items:center;gap:12px;">
+              ${avatarHTML(s.c.id, 40)}
+              <div>
+                <div class="name">${escapeHTML(s.c.name)}</div>
+                <div style="font-size:12.5px;color:var(--gray);margin-top:2px;">${s.c.tags.map(escapeHTML).join(' · ')}</div>
+              </div>
+            </div>
+            <div class="match">#${String(s.c.id).padStart(2,'0')}</div>
+          </div>
+        `).join('')}
+      </div>
+      <button class="btn btn-primary quiz-restart" id="quizRestart">Reset Matcher</button>
+    </div>
+  `;
+  document.getElementById('quizRestart').addEventListener('click', ()=>{
+    quizIndex = 0; quizScores = {}; renderQuiz();
+  });
+}
+
+/* ================= ACCESSIBLE BIO MODAL WITH FOCUS TRAP ================= */
+const bioOverlay = document.getElementById('bioOverlay');
+const bioPanel = document.getElementById('bioPanel');
+let lastFocused = null;
+
+function handleBioKeyDown(e){
+  if(e.key === 'Escape'){
+    closeBioModal();
+    return;
+  }
+  if(e.key === 'Tab' && bioOverlay.classList.contains('show')){
+    const focusables = bioPanel.querySelectorAll('button, [tabindex]:not([tabindex="-1"])');
+    if(!focusables.length) return;
+    const first = focusables[0];
+    const last = focusables[focusables.length - 1];
+    if(e.shiftKey && document.activeElement === first){
+      last.focus();
+      e.preventDefault();
+    } else if(!e.shiftKey && document.activeElement === last){
+      first.focus();
+      e.preventDefault();
+    }
+  }
+}
+
+function openBioModal(id){
+  const c = CANDIDATES.find(x=>x.id===id);
+  if(!c) return;
+  lastFocused = document.activeElement;
+  bioPanel.innerHTML = `
+    <button class="bio-close" id="bioClose" aria-label="Close biography">✕</button>
+    <div class="bio-head">
+      <div class="bio-portrait">${avatarHTML(c.id, 96)}</div>
+      <div class="bio-head-text">
+        <h3 id="bioName">${escapeHTML(c.name)}</h3>
+        <div class="years">${escapeHTML(c.years)}</div>
+        <p class="tagline">${escapeHTML(c.tagline)}</p>
+        <span class="bio-badge">Candidate #${String(c.id).padStart(2,'0')}</span>
+      </div>
+    </div>
+    <div class="bio-focus-tags">${c.tags.map(t=>`<span>${escapeHTML(t)}</span>`).join('')}</div>
+    <div class="bio-section-label">Full Biography</div>
+    <p class="bio-text">${escapeHTML(c.bio)}</p>
+    <div class="bio-section-label">Experience</div>
+    <ul class="bio-exp-list">${c.experience.map(x=>`<li>${escapeHTML(x)}</li>`).join('')}</ul>
+    <div class="bio-foot">
+      <button type="button" class="btn btn-primary btn-sm" id="bioAddCompare">${selected.has(c.id) ? 'Remove from compare' : 'Add to compare'}</button>
+      <button type="button" class="btn btn-outline btn-sm" id="bioCloseBtn">Close</button>
+    </div>
+  `;
+  bioOverlay.classList.add('show');
+  document.body.style.overflow = 'hidden';
+  document.addEventListener('keydown', handleBioKeyDown);
+  
+  document.getElementById('bioClose').addEventListener('click', closeBioModal);
+  document.getElementById('bioCloseBtn').addEventListener('click', closeBioModal);
+  document.getElementById('bioAddCompare').addEventListener('click', (e)=>{
+    if(selected.has(c.id)){ selected.delete(c.id); }
+    else{
+      if(selected.size >= 4){ return; }
+      selected.add(c.id);
+    }
+    syncStateToURL();
+    updateCompareBar();
+    renderLedger();
+    renderCompareTable();
+    e.target.textContent = selected.has(c.id) ? 'Remove from compare' : 'Add to compare';
+  });
+  document.getElementById('bioClose').focus();
+}
+
+function closeBioModal(){
+  bioOverlay.classList.remove('show');
+  document.body.style.overflow = '';
+  document.removeEventListener('keydown', handleBioKeyDown);
+  if(lastFocused) lastFocused.focus();
+}
+
+bioOverlay.addEventListener('click', (e)=>{
+  if(e.target === bioOverlay) closeBioModal();
+});
+
+/* ================= INIT ================= */
+loadStateFromURL();
+renderFilterTags();
+renderLedger();
+updateCompareBar();
+renderCompareTable();
+renderQuiz();
+</script>
+</body>
+</html>
