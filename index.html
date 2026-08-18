@@ -191,10 +191,15 @@ section { padding: 64px 0; }
 
 /* FAQ Accordion */
 .faq-wrap { max-width: 800px; margin: 0 auto; }
+.faq-category { color: var(--gold-main); font-size: 13px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; margin: 32px 0 14px; }
+.faq-category:first-child { margin-top: 0; }
 .faq-item { background: var(--white); border: 1px solid var(--border-light); border-radius: 8px; margin-bottom: 12px; padding: 18px 20px; }
 .faq-item summary { cursor: pointer; font-weight: 700; font-size: 16px; color: var(--green-deep); list-style: none; display: flex; justify-content: space-between; align-items: center; }
 .faq-item summary::-webkit-details-marker { display: none; }
 .faq-item p { margin: 12px 0 0; color: var(--ink-muted); font-size: 14.5px; }
+.faq-list { margin: 10px 0 0; padding-left: 20px; color: var(--ink-muted); font-size: 14.5px; }
+.faq-list li { margin-bottom: 6px; line-height: 1.55; }
+.faq-list li:last-child { margin-bottom: 0; }
 
 /* Modal */
 .bio-overlay {
@@ -230,7 +235,7 @@ footer { background: var(--green-deep); color: var(--gold-light); padding: 48px 
     </a>
     <button class="nav-toggle" id="navToggle" aria-label="Toggle Navigation">☰</button>
     <div class="nav-links" id="navLinks">
-      <a href="#candidates">Nominees (24)</a>
+      <a href="#candidates">Nominees (52)</a>
       <a href="#voting-faq">Voting FAQ</a>
       <a href="https://electionrunner.com" target="_blank" class="btn btn-gold" style="padding:8px 16px; font-size:13px;">Cast Ballot Online →</a>
     </div>
@@ -249,8 +254,8 @@ footer { background: var(--green-deep); color: var(--gold-light); padding: 48px 
   <div class="hero-overlay"></div>
   <div class="wrap hero-content">
     <div class="hero-text">
-      <span class="hero-eyebrow-rule"><span class="rule"></span><span class="eyebrow" style="margin-bottom:0;">Shortlisted Nominees Confirmed</span></span>
-      <h1>24 Candidates Standing for 11 Board Seats</h1>
+      <span class="hero-eyebrow-rule"><span class="rule"></span><span class="eyebrow" style="margin-bottom:0;">Committed to a Transparent, Orderly Election</span></span>
+      <h1>52 Candidates Standing for 11 Board Seats</h1>
       <p class="hero-kicker">Serving The Mowbray Community Since 1886</p>
       <p class="hero-sub">Review candidate platform statements, compare background experience, and access the secure digital voting portal.</p>
       <div class="hero-actions">
@@ -267,11 +272,14 @@ footer { background: var(--green-deep); color: var(--gold-light); padding: 48px 
     <div class="wrap">
       <div class="section-head">
         <span class="eyebrow">Official Ballot Roster</span>
-        <h2>Shortlisted Candidates</h2>
-        <p style="color:var(--ink-muted);">Filter by priority area to review candidate profiles and statements.</p>
+        <h2>Full List of Nominees</h2>
+        <p style="color:var(--ink-muted);">In the interest of transparency and an orderly Special General Meeting, all 52 eligible nominees are listed below. Tap a candidate to view their full profile.</p>
       </div>
 
-      <div class="filter-bar" id="filterContainer"></div>
+      <div class="search-bar" style="margin-bottom:24px;">
+        <input type="text" id="candidateSearch" placeholder="Search candidates by name..." oninput="filterBySearch(this.value)"
+               style="width:100%; max-width:420px; padding:11px 16px; border:1px solid rgba(22,62,36,0.2); border-radius:8px; font-size:14px; font-family:'Inter',sans-serif;">
+      </div>
       <div class="ledger-grid" id="candidateGrid"></div>
     </div>
   </section>
@@ -281,26 +289,79 @@ footer { background: var(--green-deep); color: var(--gold-light); padding: 48px 
     <div class="wrap">
       <div class="section-head center">
         <span class="eyebrow">Voter Help Center</span>
-        <h2>Voting Platform FAQ</h2>
-        <p style="color:var(--ink-muted);">Answers to frequently asked questions regarding ballot access and security.</p>
+        <h2>Frequently Asked Questions</h2>
+        <p style="color:var(--ink-muted);">Answers to common questions about candidates, voting times, and how digital and physical voting work together.</p>
       </div>
 
       <div class="faq-wrap">
-        <details class="faq-item" open>
-          <summary>How do I access the online voting platform? <span>+</span></summary>
-          <p>Eligible voters receive a unique Voter ID and Access Key via SMS or registered email. Click the "Cast Ballot Online" button above to enter your credentials and cast your vote.</p>
+        <h3 class="faq-category">General Election Information</h3>
+        <details class="faq-item" name="faq-accordion" open>
+          <summary>Where can I find information about the candidates? <span>+</span></summary>
+          <p>You can view the profiles and 150-word biographies of all 52 candidates on our official website at <a href="https://mcbelections.co.za" target="_blank">mcbelections.co.za</a>.</p>
         </details>
-        <details class="faq-item">
-          <summary>How many candidates can I vote for? <span>+</span></summary>
-          <p>You may select up to 11 candidates on your ballot. You are not required to fill all 11 slots to submit a valid ballot.</p>
+        <details class="faq-item" name="faq-accordion">
+          <summary>What time does voting open and close? <span>+</span></summary>
+          <p>Both digital and physical voting will take place simultaneously from 10:00 AM to 4:00 PM on election day.</p>
         </details>
-        <details class="faq-item">
-          <summary>Is my vote private and anonymous? <span>+</span></summary>
-          <p>Yes. The platform verifies voter eligibility via your Access Key, but your specific candidate selections are encrypted and detached from personal identifiers.</p>
+        <details class="faq-item" name="faq-accordion">
+          <summary>When will the results be announced? <span>+</span></summary>
+          <p>The final election results will be announced on the radio on Monday night.</p>
         </details>
-        <details class="faq-item">
-          <summary>What if I did not receive my Voter ID or Access Key? <span>+</span></summary>
-          <p>If you are a registered plot holder or Mowbray resident in good standing, please contact the electoral helpline or cemetery office to verify your details on the voter roll.</p>
+
+        <h3 class="faq-category">Digital Voting</h3>
+        <details class="faq-item" name="faq-accordion">
+          <summary>How do I access the digital voting platform? <span>+</span></summary>
+          <p>Registered members will receive an SMS (if a cell phone number was provided) or an email. This message will contain your unique ID and a randomly generated access key to log into the platform.</p>
+        </details>
+        <details class="faq-item" name="faq-accordion">
+          <summary>What if I didn't provide a phone number or email when registering? <span>+</span></summary>
+          <p>If we do not have your digital contact details, you will not receive an online link. You can either come to the venue to vote physically or request a digital link by providing your ID.</p>
+        </details>
+
+        <h3 class="faq-category">Physical Voting</h3>
+        <details class="faq-item" name="faq-accordion">
+          <summary>Can I vote physically if I received a digital link? <span>+</span></summary>
+          <p>Yes, you can. When you arrive at the venue, our administrators will check your ID against the live system. Provided you have not yet cast your digital vote, your online access will be revoked, and you will be issued a physical ballot paper.</p>
+        </details>
+        <details class="faq-item" name="faq-accordion">
+          <summary>How is the election preventing double voting? <span>+</span></summary>
+          <p>We utilize a live, digitally hosted voter's roll. The moment a vote is cast online, the system updates. All physical voters are checked against this live spreadsheet before being allowed to vote.</p>
+        </details>
+        <details class="faq-item" name="faq-accordion">
+          <summary>Is the physical venue wheelchair accessible? <span>+</span></summary>
+          <p>Yes, wheelchair access is available via the venue's elevator. We have assigned two dedicated personnel to operate the elevator and assist voters.</p>
+        </details>
+        <details class="faq-item" name="faq-accordion">
+          <summary>Is the online voting platform secure? <span>+</span></summary>
+          <p>Yes, the platform we are using is <a href="https://electionrunner.com" target="_blank">Election Runner</a>, which secures all elections with SSL (https://) grade security.</p>
+          <ul class="faq-list">
+            <li>Furthermore, the platform utilizes 256-bit encryption to keep your election and ballots strictly secure from unauthorized access.</li>
+          </ul>
+        </details>
+        <details class="faq-item" name="faq-accordion">
+          <summary>Has this platform been tested and proven reliable? <span>+</span></summary>
+          <ul class="faq-list">
+            <li>Absolutely, Election Runner is a trusted online voting software built specifically for organizations, universities, clubs, and unions.</li>
+            <li>It is recognized globally and maintains a perfect 5.0 overall rating on <a href="https://www.capterra.co.za/software/172699/election-runner" target="_blank">Capterra South Africa</a> for its secure, user-friendly, and highly reliable infrastructure.</li>
+            <li>The system is optimized to perform flawlessly across desktops and mobile devices, ensuring accessibility for all users.</li>
+          </ul>
+        </details>
+        <details class="faq-item" name="faq-accordion">
+          <summary>How does the system prevent voter fraud or double voting? <span>+</span></summary>
+          <ul class="faq-list">
+            <li>To guarantee the integrity of the election, the platform strictly controls who is eligible to participate.</li>
+            <li>Every eligible voter receives a completely unique "Voter ID" alongside a randomly generated "Voter Key".</li>
+            <li>These specific credentials ensure that the system restricts each individual to casting only one ballot.</li>
+            <li>On election day, our physical registration desk will monitor the live system in real-time to ensure no physical ballots are issued to members who have already successfully cast their vote online.</li>
+          </ul>
+        </details>
+        <details class="faq-item" name="faq-accordion">
+          <summary>Will my personal information and vote remain private? <span>+</span></summary>
+          <ul class="faq-list">
+            <li>Yes, your privacy is fully protected.</li>
+            <li>The software allows election administrators to build, launch, and monitor the election process while utilizing fully encrypted ballots.</li>
+            <li>This ensures that while voter turnout and live results can be monitored transparently, individual voting choices remain strictly confidential.</li>
+          </ul>
         </details>
       </div>
     </div>
@@ -322,45 +383,94 @@ footer { background: var(--green-deep); color: var(--gold-light); padding: 48px 
         <a href="https://electionrunner.com" target="_blank" style="color:var(--gold-bright);">Official Voting Portal →</a>
       </div>
     </div>
-    <div style="border-top:1px solid rgba(197,160,89,0.3); padding-top:16px; font-size:12px; opacity:0.8; display:flex; justify-content:space-between;">
+    <div style="border-top:1px solid rgba(197,160,89,0.3); padding-top:16px; font-size:12px; opacity:0.8;">
       <span>© 2026 Mowbray Cemetery Board Election Hub</span>
-      <span>System Preview</span>
     </div>
   </div>
 </footer>
 
 <script>
-const FOCUS_AREAS = ["Heritage preservation", "Financial transparency", "Grounds & maintenance", "Community engagement", "Records digitisation"];
+const CANDIDATES = [
+  { name: "Abduroaf Muneer", bio: "Professor Muneer Abduroaf is an NRF C-rated researcher and Associate Professor of Private Law at UWC, specializing in Islamic and Family Law. An admitted Attorney, Sworn Translator, and MJC Executive Council Member, he bridges academic scholarship, constitutional governance, and community leadership." },
+  { name: "Abrahams Anwar Sadat", bio: "Anwar Sadat Abrahams is a dedicated community leader with over two decades of retail management experience. Through his media platform, A&S Productions, he passionately highlights community issues, local history, and meaningful discourse." },
+  { name: "Abrahams Nasief", bio: "A former Truth and Reconciliation Commission assistant and experienced sub-editor, Nasief is deeply dedicated to transparency, accountability, and preserving Muslim heritage." },
+  { name: "Abrahams Nasief", bio: "A retired professional with a strong background in medical marketing consultancy and construction. Having grown up in District Six, he maintains a deep family connection to the Mowbray Maqbarah." },
+  { name: "Abrahams Salmaan", bio: "Moulana Salmaan Abrahams serves as the First Deputy President of the MJC. As an Islamic scholar and social entrepreneur, he brings rich experience in community advancement and youth development." },
+  { name: "Adjiet Aisa", bio: "Aisha Adjiet holds an Honours Degree in Maqasid al-Shari'ah and brings over 15 years of experience in da'wah and community service. She currently serves IPSA in executive administration and student wellness." },
+  { name: "Bardien Shaheed", bio: "Shaheed currently serves the community as a dedicated administrator at Majlisush Shura Al Islani." },
+  { name: "Basadien Shamiel", bio: "A qualified actuary and acting chairman of Mosque Shafee and the Masajid of Bokaap, Shamiel is heavily involved in both community services and financial governance." },
+  { name: "Bassier Faizel", bio: "With practical experience in Janazah preparation, landscaping, and logistics management, Faizel offers the operational leadership and facility management skills essential for meticulous cemetery maintenance." },
+  { name: "Bassier Mohamed Majedi", bio: "A medical doctor and long-standing Boorhaanol Islam Movement executive, Dr. Bassier is a staunch advocate for good governance, absolute accountability, and legal compliance at the Mowbray Maqbarah." },
+  { name: "Bassier Tolgah", bio: "Tolgah is a strong advocate for transparent governance, pushing for strict constitutional compliance and proper financial oversight to protect the community's Amanah." },
+  { name: "Canfield Yagyah", bio: "As a professional undertaker, Yagyah brings daily operational experience in burials and logistics, aiming to improve cemetery administration with transparency, dignity, and compassion." },
+  { name: "Crombie Ebrahim", bio: "A dedicated educator and former maintenance manager with profound expertise in Islamic instruction, Ebrahim brings strong organizational and youth development skills to the community." },
+  { name: "Crombie Luodt", bio: "A UWC Science graduate, retired software programmer, and successful entrepreneur, Luodt is also the creator of the Uwatch neighborhood watch and an active community builder." },
+  { name: "Da Silva Mauro Nunes Mendes", bio: "An international business development leader, Mauro offers extensive experience in governance, strategic planning, and financial stewardship, dedicated entirely to restoring trust and accountability to the cemetery." },
+  { name: "Dalwai Yusuf Khan", bio: "Advocate Dalwai is a practicing High Court Advocate and Chairperson of the Cape Mazaar Society, bringing exceptional legal, governance, and heritage preservation expertise." },
+  { name: "Davids Mogamat Salih", bio: "A former anti-Apartheid activist and retired government official, Mogamat remains deeply involved in heritage and cultural preservation as Life President of Keep The Dream." },
+  { name: "Davids Phaldie", bio: "With over 25 years in law enforcement and disaster management, Phaldie offers critical expertise in safety protocols, operational planning, and community governance." },
+  { name: "Davids Riyadh", bio: "An experienced humanitarian worker and facilities manager, Riyadh expertly combines international corporate governance knowledge with a passion for serving the indigent." },
+  { name: "Davids Sadiyah", bio: "A passionate madrasah teacher and community organizer with practical financial administration experience, Sadiyah brings a generational connection and strong commitment to Mowbray Cemetery." },
+  { name: "Dejongh Nazeem", bio: "Having served five years as a Supervisor at Mowbray Cemetery, Nazeem provides unmatched practical expertise in burial administration and on-the-ground cemetery operations." },
+  { name: "Fataar Riad", bio: "Sheikh Riad Fataar, President of the MJC, is a distinguished scholar and advocate who has tirelessly championed the protection, development, and availability of Muslim cemetery land." },
+  { name: "Fransman Aqeel", bio: "Founder of the Aqeel Fransman Foundation, Aqeel turned personal adversity into a powerful mission to feed the needy, becoming a beacon of compassionate leadership in Mitchell's Plain." },
+  { name: "Gamiet Faizel", bio: "A site foreman and frequent visitor to the Maqbarah, Faizel brings a practical construction background and a grounded community perspective to the board." },
+  { name: "Garda Muhammad Shakeel", bio: "A 30-year-old attorney, radio presenter, and active community organizer, Muhammad is dedicated to youth engagement, voter registration, and upholding Islamic community heritage." },
+  { name: "George Yaseen", bio: "With 37 years at Somerset Hospital administering death and medico-legal cases, Yaseen brings profound expertise in handling post-mortems and providing guidance to grieving families." },
+  { name: "Girie Siraaj", bio: "Moulana Siraaj serves in the MJC Fatwa Department and as a Systems Coordinator. He brings solid theological scholarship and rigorous institutional administrative skills." },
+  { name: "Hayat Abdul Rezah", bio: "A high school educator with 35 years of experience, Abdul Rezah maintains strong community relations and provides invaluable guidance to people striving to fulfill their dreams." },
+  { name: "Hendricks Nadeem", bio: "A retired principal and lifelong activist, Nadeem fights for social justice and serves the poor through feeding schemes and community organizations in Thornton." },
+  { name: "Jakoet Aboubakar", bio: "A Chartered Accountant and former CFO with extensive board experience on the JSE, Aboubakar brings top-tier financial oversight and corporate governance acumen." },
+  { name: "Jassiem Mogamat Ashraf", bio: "Having served on the Nur el Houda Masjid executive for over 25 years, Ashraf has proven his long-term commitment to community stewardship and institutional maintenance." },
+  { name: "Kamedien Mogamat Ganief", bio: "A retired public sector manager and heritage activist, Ganief has decades of experience in facilities management and preserving Cape Muslim history and archives." },
+  { name: "Khan Gamiem", bio: "An engineering company director and active community member, Gamiem has deep ties to Bo-Kaap traditions and extensive experience in the practical handling of Janazah rites." },
+  { name: "Khan Yasmin", bio: "An attorney and former district prosecutor, Yasmin is a passionate humanitarian and family law expert dedicated to serving vulnerable communities with unyielding integrity." },
+  { name: "Lee Ebrahim", bio: "A qualified Alim, Ebrahim possesses over 25 years of hands-on experience in teaching and executing Janazah rites across various communities." },
+  { name: "Malick Nabeweya", bio: "A versatile media professional and women's rights advocate, Nabeweya brings vast public relations experience, having served as PRO for the MJC and Voice of the Cape." },
+  { name: "Mohamed Ayub", bio: "A seasoned public sector manager in environmental planning, Ayub has been instrumental in digitizing Mowbray Cemetery records and ensuring its legal and environmental compliance." },
+  { name: "Mohamed Mohamed Uzair", bio: "Founder of Cape Town Intifada, Uzair is a dedicated grassroots activist focused on social justice, anti-apartheid advocacy, and practical community support." },
+  { name: "Moolla Safiya", bio: "A high-achieving law student, Safiya brings exceptional legal research skills and a proactive, energetic dedication to advocacy and community service." },
+  { name: "Moosa Khasifa", bio: "A telecommunications operations manager and co-founder of the Green Dome Institute, Kashiefa excels in strategic coordination, youth development, and driving sustainable social impact." },
+  { name: "Parker Munier", bio: "An acclaimed filmmaker and community advocate, Munier leverages over 30 years in media to preserve Cape Muslim heritage and build strategic organizational partnerships." },
+  { name: "Peters Anwar", bio: "Anwar is a progressive community activist strongly committed to driving positive social change and upliftment." },
+  { name: "Petersen Abdud Daiyaan", bio: "An honours graduate in Environmental Science and an archival researcher, Abdud-Daiyaan is dedicated to uncovering and preserving the rich heritage of Cape Muslim society." },
+  { name: "Salie Shameemah", bio: "Advocate Shameemah Salie is a City Councillor with nearly 30 years in law and public administration, bringing strategic oversight and robust governance to cemetery management." },
+  { name: "Salie Zaid", bio: "An IT professional with over 30 years of experience, Zaid is poised to modernize the cemetery's digital infrastructure, cybersecurity, and financial transparency." },
+  { name: "Sampson Khaalid", bio: "An educational administrator, Khalid specializes in institutional operations, logistics management, and maintaining rigorous accountability systems." },
+  { name: "Satardien Sha Shaheed", bio: "A highly educated scholar holding three PhDs in World Peace, Shariah, and Sociology, offering profound theological and cultural perspectives to governance." },
+  { name: "Sayed Faizal", bio: "A distinguished broadcaster and law student, Faizal has spearheaded the modernization of cemetery administration, advancing systems and policies that ease the burden on grieving families." },
+  { name: "Schroeder Mogamat Ameen", bio: "With 28 years as a registered undertaker, Ameen provides invaluable hands-on expertise in funeral services and highly compassionate community support." },
+  { name: "Sofejan Mu'Aweeya", bio: "Founder of Mu'aweeya's Burial Service, he brings over 40 years of dedicated Toekamani experience, serving families with dignity, pride, and deep compassion." },
+  { name: "Solomon Igshaan", bio: "An Islamic University of Madinah graduate and long-serving Imam, Igshaan offers deep knowledge of burial laws and a lifelong, unwavering commitment to the Mowbray community." },
+  { name: "West Muhammad", bio: "Sheikh Muhammad West is a Chartered Accountant and Treasurer of the MJC. He provides exemplary financial leadership and academic rigor to various local and international community institutions." }
+].map((c, i) => ({
+  id: i + 1,
+  name: c.name,
+  initials: c.name.split(' ').filter(Boolean).map(w => w[0]).slice(0, 2).join('').toUpperCase(),
+  photo: "", // Placeholder for real picture URL (e.g. "images/candidates/1.jpg")
+  bio: c.bio
+}));
 
-const CANDIDATES = Array.from({length: 24}, (_, i) => {
-  const letter = String.fromCharCode(65 + i); // A, B, C ... X
-  return {
-    id: i + 1,
-    name: `Candidate ${letter}`,
-    initials: letter,
-    photo: "", // Placeholder for real picture URL (e.g. "images/candidates/1.jpg")
-    tag: FOCUS_AREAS[i % FOCUS_AREAS.length],
-    statement: "Dedicated to transparent community service, heritage preservation, and sustainable governance for Mowbray Cemetery."
-  };
-});
-
-let activeFilter = null;
-
-function renderFilters() {
-  const container = document.getElementById('filterContainer');
-  container.innerHTML = `<button class="tag-btn ${activeFilter===null?'active':''}" onclick="filterBy(null)">All Nominees (24)</button>`;
-  FOCUS_AREAS.forEach(area => {
-    container.innerHTML += `<button class="tag-btn ${activeFilter===area?'active':''}" onclick="filterBy('${area}')">${area}</button>`;
-  });
+function truncate(text, max) {
+  return text.length > max ? text.slice(0, max).trim() + "…" : text;
 }
 
-function filterBy(area) { activeFilter = area; renderFilters(); renderGrid(); }
+let searchTerm = "";
+
+function filterBySearch(value) {
+  searchTerm = value.trim().toLowerCase();
+  renderGrid();
+}
 
 function renderGrid() {
   const grid = document.getElementById('candidateGrid');
   grid.innerHTML = '';
-  const filtered = CANDIDATES.filter(c => !activeFilter || c.tag === activeFilter);
-  
+  const filtered = CANDIDATES.filter(c => c.name.toLowerCase().includes(searchTerm));
+
+  if (filtered.length === 0) {
+    grid.innerHTML = `<p style="grid-column:1/-1; color:var(--ink-muted); text-align:center; padding:32px 0;">No candidates match "${searchTerm}".</p>`;
+  }
+
   filtered.forEach(c => {
     // Render Candidate Picture Placeholder with Fallback Initials
     const photoHTML = c.photo 
@@ -372,13 +482,12 @@ function renderGrid() {
         <div class="card-top">
           <div class="photo-frame">${photoHTML}</div>
           <div class="cand-name">
-            <h3>${c.name}</h3>
+            <h3 style="cursor:pointer;" onclick="openBio(${c.id})">${c.name}</h3>
             <span class="cand-id">Candidate ID #${String(c.id).padStart(2,'0')}</span>
           </div>
         </div>
-        <p class="cand-statement">${c.statement}</p>
-        <div class="card-foot">
-          <span style="font-size:11px; background:var(--green-tint); color:var(--green-main); padding:3px 8px; border-radius:10px; font-weight:600;">${c.tag}</span>
+        <p class="cand-statement">${truncate(c.bio, 110)}</p>
+        <div class="card-foot" style="justify-content:flex-end;">
           <button class="bio-link" onclick="openBio(${c.id})">Full Profile →</button>
         </div>
       </div>
@@ -401,8 +510,7 @@ function openBio(id) {
         <span style="color:var(--gold-main); font-weight:700; font-size:13px;">Candidate #${String(c.id).padStart(2,'0')}</span>
       </div>
     </div>
-    <span style="font-size:12px; background:var(--green-tint); color:var(--green-main); padding:4px 10px; border-radius:12px; font-weight:600;">${c.tag}</span>
-    <p style="margin:16px 0; font-size:14.5px; color:var(--ink-muted); line-height:1.6;">${c.statement}</p>
+    <p style="margin:16px 0; font-size:14.5px; color:var(--ink-muted); line-height:1.6;">${c.bio}</p>
     <button class="btn btn-gold" onclick="closeBio()" style="width:100%; justify-content:center;">Close Profile</button>
   `;
   document.getElementById('bioOverlay').classList.add('show');
@@ -414,7 +522,6 @@ document.getElementById('navToggle').addEventListener('click', () => {
   document.getElementById('navLinks').classList.toggle('open');
 });
 
-renderFilters();
 renderGrid();
 </script>
 </body>
