@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Voting Platform — Mowbray Moslem Cemetery Board</title>
+<link rel="icon" type="image/png" href="assets/cmmbLogo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --green-deep: #163E24;
+  --green-main: #1B4D2E;
+  --green-light: #2A663F;
+  --green-tint: #F2F7F4;
+  --gold-main: #C5A059;
+  --gold-bright: #DAA520;
+  --gold-light: #F7F0DF;
+  --gold-border: #D4AF37;
+  --ink-dark: #121A15;
+  --ink-muted: #4A584F;
+  --border-light: #E0E8E3;
+  --white: #FFFFFF;
+}
+
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: var(--green-deep);
+  color: var(--white);
+  font-family: 'Inter', -apple-system, sans-serif;
+  line-height: 1.6;
+  display: flex;
+  flex-direction: column;
+}
+a { color: inherit; text-decoration: none; }
+.serif { font-family: 'Cambria', 'Georgia', serif; }
+
+.top-bar {
+  border-bottom: 1px solid rgba(197,160,89,0.25);
+  padding: 20px 24px;
+}
+.brand {
+  display: flex; align-items: center; gap: 10px;
+  max-width: 1160px; margin: 0 auto;
+}
+.brand-logo { height: 38px; width: auto; }
+.brand-text { font-size: 14px; font-weight: 700; }
+.brand-sub { font-size: 11px; color: var(--gold-main); font-weight: 500; }
+
+.center-stage {
+  flex: 1;
+  display: flex; align-items: center; justify-content: center;
+  padding: 48px 24px;
+  text-align: center;
+}
+.stage-inner { max-width: 560px; }
+
+.icon-badge {
+  width: 76px; height: 76px; margin: 0 auto 28px;
+  border: 2px solid var(--gold-main); border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  background: rgba(197,160,89,0.08);
+}
+.icon-badge svg { width: 34px; height: 34px; }
+
+.eyebrow {
+  display: inline-block; font-size: 12px; font-weight: 600;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--gold-main); margin-bottom: 16px;
+}
+h1 {
+  font-size: clamp(28px, 4.5vw, 40px);
+  color: var(--gold-bright);
+  margin: 0 0 18px;
+  line-height: 1.2;
+}
+.lede {
+  font-size: 16px; color: #D1E0D7; margin: 0 0 32px;
+}
+
+.date-pill {
+  display: inline-flex; align-items: center; gap: 10px;
+  border: 1px solid var(--gold-main); border-radius: 40px;
+  padding: 14px 28px; margin-bottom: 36px;
+  background: rgba(197,160,89,0.08);
+}
+.date-pill .label { font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: #D1E0D7; }
+.date-pill .date { font-family: 'Cambria', 'Georgia', serif; font-size: 20px; color: var(--gold-bright); font-weight: 700; }
+
+.actions { display: flex; gap: 14px; flex-wrap: wrap; justify-content: center; }
+.btn {
+  display: inline-flex; align-items: center; justify-content: center;
+  padding: 13px 26px; border-radius: 6px; font-weight: 700; font-size: 14px;
+  border: 1px solid transparent; transition: opacity 0.15s ease;
+}
+.btn:hover { opacity: 0.88; }
+.btn-gold { background: var(--gold-main); color: var(--green-deep); }
+.btn-outline { border-color: var(--gold-main); color: var(--gold-bright); }
+
+.notify-note {
+  margin-top: 28px; font-size: 13px; color: #A9BEB0;
+}
+
+footer {
+  border-top: 1px solid rgba(197,160,89,0.25);
+  padding: 18px 24px; text-align: center; font-size: 12px; opacity: 0.75;
+}
+
+@media (max-width: 480px) {
+  .date-pill { flex-direction: column; gap: 4px; padding: 16px 24px; }
+}
+</style>
+</head>
+<body>
+
+<div class="top-bar">
+  <a href="index.html" class="brand">
+    <img src="assets/cmmbLogo.png" alt="Mowbray Moslem Cemetery Board Logo" class="brand-logo">
+    <div>
+      <div class="brand-text">Mowbray Cemetery</div>
+      <div class="brand-sub">Moslem Cemetery Board • Est. 1886</div>
+    </div>
+  </a>
+</div>
+
+<div class="center-stage">
+  <div class="stage-inner">
+    <div class="icon-badge">
+      <svg viewBox="0 0 24 24" fill="none" stroke="#DAA520" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="3" y="4" width="18" height="18" rx="2"/>
+        <path d="M16 2v4M8 2v4M3 10h18"/>
+        <path d="M9 16l2 2 4-4"/>
+      </svg>
+    </div>
+
+    <span class="eyebrow">Digital Voting Platform</span>
+    <h1 class="serif">The voting platform is not yet open</h1>
+    <p class="lede">We're finalizing the secure digital ballot ahead of the Special General Meeting. Please check back on the date below to cast your vote online.</p>
+
+    <div class="date-pill">
+      <span class="label">Opens</span>
+      <span class="date">23 August 2026</span>
+    </div>
+
+    <div class="actions">
+      <a href="index.html#candidates" class="btn btn-gold">Review Candidates</a>
+      <a href="index.html#voting-faq" class="btn btn-outline">Read Voting FAQ</a>
+    </div>
+
+    <p class="notify-note">Registered voters will receive their unique Voter ID and Access Key by SMS or email once the platform goes live.</p>
+  </div>
+</div>
+
+<footer>
+  © 2026 Mowbray Cemetery Board Election Hub
+</footer>
+
+</body>
+</html>
