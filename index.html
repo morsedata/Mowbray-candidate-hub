@@ -235,7 +235,7 @@ footer { background: var(--green-deep); color: var(--gold-light); padding: 48px 
     </a>
     <button class="nav-toggle" id="navToggle" aria-label="Toggle Navigation">☰</button>
     <div class="nav-links" id="navLinks">
-      <a href="#candidates">Nominees (52)</a>
+      <a href="#candidates">Nominees (53)</a>
       <a href="#voting-faq">Voting FAQ</a>
       <a href="https://electionrunner.com" target="_blank" class="btn btn-gold" style="padding:8px 16px; font-size:13px;">Cast Ballot Online →</a>
     </div>
@@ -255,7 +255,7 @@ footer { background: var(--green-deep); color: var(--gold-light); padding: 48px 
   <div class="wrap hero-content">
     <div class="hero-text">
       <span class="hero-eyebrow-rule"><span class="rule"></span><span class="eyebrow" style="margin-bottom:0;">Committed to a Transparent, Orderly Election</span></span>
-      <h1>52 Candidates Standing for 11 Board Seats</h1>
+      <h1>53 Candidates Standing for 11 Board Seats</h1>
       <p class="hero-kicker">Serving The Mowbray Community Since 1886</p>
       <p class="hero-sub">Review candidate platform statements, compare background experience, and access the secure digital voting portal.</p>
       <div class="hero-actions">
@@ -273,7 +273,7 @@ footer { background: var(--green-deep); color: var(--gold-light); padding: 48px 
       <div class="section-head">
         <span class="eyebrow">Official Ballot Roster</span>
         <h2>Full List of Nominees</h2>
-        <p style="color:var(--ink-muted);">In the interest of transparency and an orderly Special General Meeting, all 52 eligible nominees are listed below. Tap a candidate to view their full profile.</p>
+        <p style="color:var(--ink-muted);">In the interest of transparency and an orderly Special General Meeting, all 53 eligible nominees are listed below. Tap a candidate to view their full profile.</p>
       </div>
 
       <div class="search-bar" style="margin-bottom:24px;">
@@ -297,7 +297,7 @@ footer { background: var(--green-deep); color: var(--gold-light); padding: 48px 
         <h3 class="faq-category">General Election Information</h3>
         <details class="faq-item" name="faq-accordion" open>
           <summary>Where can I find information about the candidates? <span>+</span></summary>
-          <p>You can view the profiles and 150-word biographies of all 52 candidates on our official website at <a href="https://mcbelections.co.za" target="_blank">mcbelections.co.za</a>.</p>
+          <p>You can view the profiles and 150-word biographies of all 53 candidates on our official website at <a href="https://mcbelections.co.za" target="_blank">mcbelections.co.za</a>.</p>
         </details>
         <details class="faq-item" name="faq-accordion">
           <summary>What time does voting open and close? <span>+</span></summary>
@@ -407,6 +407,7 @@ const CANDIDATES = [
   { name: "Crombie Luodt", bio: "A UWC Science graduate, retired software programmer, and successful entrepreneur, Luodt is also the creator of the Uwatch neighborhood watch and an active community builder." },
   { name: "Da Silva Mauro Nunes Mendes", bio: "An international business development leader, Mauro offers extensive experience in governance, strategic planning, and financial stewardship, dedicated entirely to restoring trust and accountability to the cemetery." },
   { name: "Dalwai Yusuf Khan", bio: "Advocate Dalwai is a practicing High Court Advocate and Chairperson of the Cape Mazaar Society, bringing exceptional legal, governance, and heritage preservation expertise." },
+  { name: "Davids Mogamat", bio: "" },
   { name: "Davids Mogamat Salih", bio: "A former anti-Apartheid activist and retired government official, Mogamat remains deeply involved in heritage and cultural preservation as Life President of Keep The Dream." },
   { name: "Davids Phaldie", bio: "With over 25 years in law enforcement and disaster management, Phaldie offers critical expertise in safety protocols, operational planning, and community governance." },
   { name: "Davids Riyadh", bio: "An experienced humanitarian worker and facilities manager, Riyadh expertly combines international corporate governance knowledge with a passion for serving the indigent." },
@@ -486,7 +487,7 @@ function renderGrid() {
             <span class="cand-id">Candidate ID #${String(c.id).padStart(2,'0')}</span>
           </div>
         </div>
-        <p class="cand-statement">${truncate(c.bio, 110)}</p>
+        <p class="cand-statement" style="${c.bio ? '' : 'font-style:italic; opacity:0.7;'}">${c.bio ? truncate(c.bio, 110) : 'Biography pending.'}</p>
         <div class="card-foot" style="justify-content:flex-end;">
           <button class="bio-link" onclick="openBio(${c.id})">Full Profile →</button>
         </div>
@@ -510,7 +511,7 @@ function openBio(id) {
         <span style="color:var(--gold-main); font-weight:700; font-size:13px;">Candidate #${String(c.id).padStart(2,'0')}</span>
       </div>
     </div>
-    <p style="margin:16px 0; font-size:14.5px; color:var(--ink-muted); line-height:1.6;">${c.bio}</p>
+    <p style="margin:16px 0; font-size:14.5px; color:var(--ink-muted); line-height:1.6; ${c.bio ? '' : 'font-style:italic; opacity:0.7;'}">${c.bio || 'Biography pending — check back closer to the election date.'}</p>
     <button class="btn btn-gold" onclick="closeBio()" style="width:100%; justify-content:center;">Close Profile</button>
   `;
   document.getElementById('bioOverlay').classList.add('show');
