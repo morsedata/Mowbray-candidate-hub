@@ -351,6 +351,31 @@ section { padding: 64px 0; }
   .announce-progress-fill { transition: none; }
 }
 
+/* Voter Roll Status Check */
+.vc-card {
+  max-width: 520px; margin: 0 auto; background: var(--white);
+  border: 1.5px solid var(--gold-main); border-radius: 12px; padding: 32px;
+  text-align: center;
+}
+.vc-form { display: flex; gap: 10px; margin: 20px 0 4px; flex-wrap: wrap; }
+.vc-input {
+  flex: 1; min-width: 200px; padding: 12px 16px; border: 1px solid rgba(22,62,36,0.2);
+  border-radius: 8px; font-size: 15px; font-family: 'Inter', sans-serif; letter-spacing: 0.03em;
+}
+.vc-input:focus { outline: none; border-color: var(--gold-main); }
+.vc-hint { font-size: 12px; color: var(--ink-muted); text-align: left; margin-bottom: 4px; }
+.vc-result {
+  margin-top: 18px; padding: 16px 18px; border-radius: 8px; font-size: 14.5px;
+  text-align: left; display: none; line-height: 1.6;
+}
+.vc-result.show { display: block; }
+.vc-result.success { background: #EAF6EE; border: 1px solid #3E8F5B; color: #1B4D2E; }
+.vc-result.warn { background: #FFF6E5; border: 1px solid var(--gold-main); color: #6B4E12; }
+.vc-result.error { background: #FBEAEA; border: 1px solid #B94A48; color: #7A2E2D; }
+.vc-result a { color: inherit; font-weight: 700; text-decoration: underline; }
+.vc-loading { font-size: 13px; color: var(--ink-muted); margin-top: 10px; display: none; }
+.vc-loading.show { display: block; }
+
 /* Footer */
 footer { background: var(--green-deep); color: var(--gold-light); padding: 48px 0 24px; border-top: 3px solid var(--gold-main); }
 .footer-grid { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 24px; margin-bottom: 32px; }
@@ -374,6 +399,7 @@ footer { background: var(--green-deep); color: var(--gold-light); padding: 48px 
     <button class="nav-toggle" id="navToggle" aria-label="Toggle Navigation">☰</button>
     <div class="nav-links" id="navLinks">
       <a href="#announcements">Announcements</a>
+      <a href="#voter-check">Check Voter Status</a>
       <a href="#candidates">Nominees (53)</a>
       <a href="#voting-faq">Voting FAQ</a>
       <a href="voting.html" class="btn btn-gold" style="padding:8px 16px; font-size:13px;">Cast Ballot Online →</a>
@@ -416,6 +442,26 @@ footer { background: var(--green-deep); color: var(--gold-light); padding: 48px 
         <button class="announce-nav-btn" id="announceNext" aria-label="Next announcement">›</button>
         <div class="announce-progress-track"><div class="announce-progress-fill" id="announceProgress"></div></div>
       </div>
+    </div>
+  </div>
+</section>
+
+<section class="section-alt" id="voter-check">
+  <div class="wrap">
+    <div class="section-head center">
+      <span class="eyebrow">Voter Roll Lookup</span>
+      <h2>Check Your Online Voting Status</h2>
+      <p style="color:var(--ink-muted);">Enter your ID number to check whether you are on the online voter roll and eligible to vote electronically.</p>
+    </div>
+
+    <div class="vc-card">
+      <p class="vc-hint">ID Number</p>
+      <form class="vc-form" id="vcForm">
+        <input type="text" id="vcInput" class="vc-input" placeholder="Enter your 13-digit ID number" inputmode="numeric" maxlength="13" autocomplete="off" required>
+        <button type="submit" class="btn btn-gold">Check Status</button>
+      </form>
+      <p class="vc-loading" id="vcLoading">Checking voter roll…</p>
+      <div class="vc-result" id="vcResult"></div>
     </div>
   </div>
 </section>
@@ -1428,6 +1474,19 @@ document.getElementById('navToggle').addEventListener('click', () => {
    a sensible floor/ceiling so nothing is either instant or endless. */
 const ANNOUNCEMENTS = [
   {
+    title: "Important Update Notice to All Voters",
+    paragraphs: [
+      "Assalaamu Alaikum, Esteemed Voters,",
+      "We are writing to provide a clear and important update regarding the distribution of voter IDs and voting access keys.",
+      "For those who registered using a valid South African ID or passport number and provided a correct email address - rest assured, your voting credentials will be delivered to your inbox no later than 10:00 AM on 23 August 2026, when voting officially opens.",
+      "To uphold the security and integrity of our online electoral process, we must enforce strict verification standards.",
+      "Consequently, members who registered without a valid ID/passport number, or without a valid email address, cannot be verified through our online system.",
+      "This includes those who provided only a cell phone number without an email address - unfortunately, these members will not receive digital voting credentials.",
+      "However, we have not left you without a voice. To ensure you can still exercise your democratic right, these members are warmly invited to cast their ballots in person at the Castle of Good Hope.",
+      "We remain fully committed to guaranteeing that every eligible voter has a fair and accessible opportunity to participate, and we thank you for your cooperation in protecting the credibility of this election."
+    ]
+  },
+  {
     title: "Important Notice Regarding Electronic Voting",
     paragraphs: [
       "Members who registered to vote electronically were required to provide accurate and complete information to enable the verification of their eligibility and the issuing of electronic voting credentials.",
@@ -1531,6 +1590,59 @@ announceSection.addEventListener('mouseenter', pauseAnnounceTimer);
 announceSection.addEventListener('mouseleave', () => startAnnounceTimer());
 announceSection.addEventListener('focusin', pauseAnnounceTimer);
 announceSection.addEventListener('focusout', () => startAnnounceTimer());
+
+/* ============ Voter Roll Status Check ============
+   Queries a Google Apps Script Web App that looks up the ID number
+   against the voter roll Google Sheet server-side. Only a yes/no
+   result is returned — the full roster is never sent to the browser.
+   Replace the URL below with your deployed Apps Script Web App URL
+   (see deployment instructions provided separately). */
+const VOTER_LOOKUP_URL = "PASTE_YOUR_APPS_SCRIPT_WEB_APP_URL_HERE";
+const ADMIN_EMAIL = "admin@mcbelections.co.za";
+
+document.getElementById('vcForm').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const input = document.getElementById('vcInput');
+  const resultBox = document.getElementById('vcResult');
+  const loading = document.getElementById('vcLoading');
+  const idNumber = input.value.trim();
+
+  resultBox.classList.remove('show', 'success', 'warn', 'error');
+
+  if (!/^\d{13}$/.test(idNumber)) {
+    resultBox.className = 'vc-result show error';
+    resultBox.innerHTML = `Please enter a valid 13-digit ID number.`;
+    return;
+  }
+
+  if (VOTER_LOOKUP_URL.startsWith('PASTE_')) {
+    resultBox.className = 'vc-result show error';
+    resultBox.innerHTML = `Voter lookup is not yet configured. Please email <a href="mailto:${ADMIN_EMAIL}">${ADMIN_EMAIL}</a> for assistance.`;
+    return;
+  }
+
+  loading.classList.add('show');
+  try {
+    const res = await fetch(`${VOTER_LOOKUP_URL}?id=${encodeURIComponent(idNumber)}`);
+    const data = await res.json();
+    loading.classList.remove('show');
+
+    if (data.found && data.eligible) {
+      resultBox.className = 'vc-result show success';
+      resultBox.innerHTML = `✓ You are on the voter roll and eligible to vote online. If you have not yet received your Voter ID and voting key, please email <a href="mailto:${ADMIN_EMAIL}">${ADMIN_EMAIL}</a> for assistance.`;
+    } else if (data.found && !data.eligible) {
+      resultBox.className = 'vc-result show warn';
+      resultBox.innerHTML = `You are on the membership roll but are not currently marked as eligible for online voting. You may still be eligible to vote in person on election day. Please email <a href="mailto:${ADMIN_EMAIL}">${ADMIN_EMAIL}</a> for assistance.`;
+    } else {
+      resultBox.className = 'vc-result show warn';
+      resultBox.innerHTML = `We could not find this ID number on the online voter roll. This does not necessarily mean you are ineligible to vote — please email <a href="mailto:${ADMIN_EMAIL}">${ADMIN_EMAIL}</a> for assistance, or attend in-person voting on election day for verification.`;
+    }
+  } catch (err) {
+    loading.classList.remove('show');
+    resultBox.className = 'vc-result show error';
+    resultBox.innerHTML = `Something went wrong checking the voter roll. Please try again, or email <a href="mailto:${ADMIN_EMAIL}">${ADMIN_EMAIL}</a> for assistance.`;
+  }
+});
 
 </script>
 </body>
