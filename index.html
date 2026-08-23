@@ -44,7 +44,7 @@
   "name": "Mowbray Moslem Cemetery Board Election 2026",
   "description": "Special General Meeting and election of 11 Board members from 53 eligible nominees, via simultaneous digital and physical voting.",
   "startDate": "2026-08-23T10:00:00+02:00",
-  "endDate": "2026-08-23T16:00:00+02:00",
+  "endDate": "2026-08-25T17:00:00+02:00",
   "eventAttendanceMode": "https://schema.org/MixedEventAttendanceMode",
   "eventStatus": "https://schema.org/EventScheduled",
   "organizer": {
@@ -402,7 +402,7 @@ footer { background: var(--green-deep); color: var(--gold-light); padding: 48px 
       <a href="#voter-check">Check Voter Status</a>
       <a href="#candidates">Nominees (53)</a>
       <a href="#voting-faq">Voting FAQ</a>
-      <a href="voting.html" class="btn btn-gold" style="padding:8px 16px; font-size:13px;">Cast Ballot Online →</a>
+      <a href="https://electionrunner.com/vote/zOKfm" target="_blank" class="btn btn-gold" style="padding:8px 16px; font-size:13px;">Cast Ballot Online →</a>
     </div>
   </div>
 </nav>
@@ -425,7 +425,7 @@ footer { background: var(--green-deep); color: var(--gold-light); padding: 48px 
       <p class="hero-sub">Review candidate platform statements, compare background experience, and access the secure digital voting portal.</p>
       <div class="hero-actions">
         <a href="#candidates" class="btn btn-gold">Explore Nominees</a>
-        <a href="voting.html" class="btn btn-green-outline" style="color:var(--gold-bright); border-color:var(--gold-main);">Access Voting Portal →</a>
+        <a href="https://electionrunner.com/vote/zOKfm" target="_blank" class="btn btn-green-outline" style="color:var(--gold-bright); border-color:var(--gold-main);">Access Voting Portal →</a>
       </div>
     </div>
   </div>
@@ -1260,7 +1260,7 @@ footer { background: var(--green-deep); color: var(--gold-light); padding: 48px 
         </details>
         <details class="faq-item" name="faq-accordion">
           <summary>What time does voting open and close? <span>+</span></summary>
-          <p>Both digital and physical voting will take place simultaneously from 10:00 AM to 4:00 PM on election day.</p>
+          <p>Both digital and physical voting commenced simultaneously at 10:00 AM on Sunday, 23 August 2026. Physical (in-person) voting concluded at 4:00 PM that day. The online voting period has since been extended to 17:00 on Tuesday, 25 August 2026 — see the Announcements section above for details.</p>
         </details>
         <details class="faq-item" name="faq-accordion">
           <summary>When will the results be announced? <span>+</span></summary>
@@ -1351,7 +1351,7 @@ footer { background: var(--green-deep); color: var(--gold-light); padding: 48px 
         <p style="font-size:13px; margin:0;">Serving the Mowbray Community since 1886.</p>
       </div>
       <div style="font-size:13px; text-align:right;">
-        <a href="voting.html" style="color:var(--gold-bright);">Official Voting Portal →</a>
+        <a href="https://electionrunner.com/vote/zOKfm" target="_blank" style="color:var(--gold-bright);">Official Voting Portal →</a>
       </div>
     </div>
     <div style="border-top:1px solid rgba(197,160,89,0.3); padding-top:16px; font-size:12px; opacity:0.8;">
@@ -1473,6 +1473,18 @@ document.getElementById('navToggle').addEventListener('click', () => {
    fixed buffer so short notices don't flash by. Duration is clamped to
    a sensible floor/ceiling so nothing is either instant or endless. */
 const ANNOUNCEMENTS = [
+  {
+    title: "Notice: Extension of Voting Period",
+    paragraphs: [
+      "Voting commenced at 10h00 on Sunday, 23 August 2026, in person and online. Physical voting concluded on 23 August 2026 at 16:00.",
+      "Following the commencement of voting, the Panel received queries from certain registered members who indicated that they had not received their unique voter identification details timeously and were consequently unable to cast their votes online.",
+      "In light of these technical challenges, and in order to ensure that all eligible registered members are afforded a reasonable opportunity to participate in the election, the Panel has resolved to extend the online voting period until 17h00 on Tuesday, 25 August 2026.",
+      "The extension is necessary to: (a) enable the IT technician to investigate and resolve the technical challenges experienced by certain members; and (b) provide registered members who were unable to vote online with a further opportunity to cast their votes.",
+      "1. For the avoidance of doubt, the extended online voting period applies only to members who were registered by the applicable cut-off time. It does not constitute an extension of the membership registration period.",
+      "2. No further membership applications will be accepted after 16h00 on Sunday, 23 August 2026.",
+      "3. The Panel appreciates the patience and cooperation of all members while these issues are being addressed and remains committed to ensuring that the electoral process is conducted fairly, transparently and efficiently."
+    ]
+  },
   {
     title: "Important Update Notice to All Voters",
     paragraphs: [
