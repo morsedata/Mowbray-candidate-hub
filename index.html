@@ -199,6 +199,14 @@ nav {
 .hero-help-email:hover { opacity: 0.88; }
 .hero-help-note { font-size: 12px; color: #A9BEB0; margin: 0; line-height: 1.5; }
 
+.hero-results-banner {
+  display: inline-flex; align-items: center; gap: 10px; margin: 22px 0 28px;
+  background: rgba(197,160,89,0.14); border: 1.5px solid var(--gold-main); border-radius: 8px;
+  padding: 14px 22px; color: var(--gold-bright); font-weight: 700; font-size: 14.5px;
+}
+.hero-results-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--gold-bright); flex-shrink: 0; }
+@media (max-width: 767px) { .hero-results-banner { margin-left: auto; margin-right: auto; text-align: left; } }
+
 @media (max-width: 767px) {
   .hero-help-box { max-width: 100%; text-align: left; }
 }
@@ -226,6 +234,17 @@ section { padding: 64px 0; }
   color: var(--gold-main); font-weight: 700; font-size: 12px; letter-spacing: 0.1em;
   text-transform: uppercase; display: block; margin-bottom: 8px;
 }
+
+/* Gratitude / Appreciation Section */
+.gratitude-grid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 24px; margin-top: 8px;
+}
+.gratitude-photo {
+  margin: 0; border-radius: 10px; overflow: hidden; border: 1px solid var(--border-light);
+  box-shadow: 0 8px 20px rgba(22, 62, 36, 0.08);
+}
+.gratitude-photo img { width: 100%; height: 100%; display: block; object-fit: cover; aspect-ratio: 4 / 3; }
+.photo-credit { text-align: center; font-size: 12px; color: var(--ink-muted); font-style: italic; margin-top: 16px; }
 
 /* Candidate Grid & Photo Frame */
 .filter-bar { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 28px; }
@@ -275,6 +294,32 @@ section { padding: 64px 0; }
 }
 .bio-link { color: var(--green-main); font-weight: 700; cursor: pointer; background: none; border: none; padding: 0; }
 
+/* Board of Convenors — "Meet the Team" style placeholders */
+.board-grid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 28px;
+}
+.board-card {
+  background: var(--white); border: 1px solid var(--border-light); border-radius: 12px;
+  padding: 30px 20px 26px; text-align: center; transition: all 0.2s ease;
+}
+.board-card:hover { border-color: var(--gold-main); box-shadow: 0 10px 24px rgba(22, 62, 36, 0.10); transform: translateY(-2px); }
+.board-photo-frame {
+  width: 104px; height: 104px; border-radius: 50%; margin: 0 auto 16px;
+  border: 2.5px solid var(--gold-main); box-shadow: 0 0 0 4px var(--gold-light);
+  background: var(--green-tint); display: flex; align-items: center; justify-content: center;
+  overflow: hidden;
+}
+.board-photo-frame img { width: 100%; height: 100%; object-fit: cover; }
+.board-photo-frame .photo-placeholder-initials { font-size: 13px; letter-spacing: 0.06em; color: var(--gold-main); font-weight: 700; }
+.board-seat { display: block; color: var(--gold-main); font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 6px; }
+.board-name { font-size: 16.5px; color: var(--green-deep); margin-bottom: 6px; }
+.board-id { display: block; font-size: 12px; color: var(--ink-muted); margin-bottom: 12px; }
+.board-badge {
+  display: inline-block; background: var(--green-tint); border: 1px solid var(--gold-main);
+  color: var(--green-main); font-size: 11px; font-weight: 700; letter-spacing: 0.05em;
+  text-transform: uppercase; padding: 4px 12px; border-radius: 20px;
+}
+
 /* FAQ Accordion */
 .faq-wrap { max-width: 800px; margin: 0 auto; }
 .faq-category { color: var(--gold-main); font-size: 13px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; margin: 32px 0 14px; }
@@ -306,7 +351,7 @@ section { padding: 64px 0; }
 
 /* Announcements Carousel */
 .announce-section {
-  background: linear-gradient(135deg, var(--alert-maroon) 0%, var(--alert-maroon-dark) 100%);
+  background: linear-gradient(135deg, var(--green-main) 0%, var(--green-deep) 100%);
   border-top: 3px solid var(--gold-main); border-bottom: 3px solid var(--gold-main);
   padding: 28px 0;
 }
@@ -399,9 +444,8 @@ footer { background: var(--green-deep); color: var(--gold-light); padding: 48px 
     <button class="nav-toggle" id="navToggle" aria-label="Toggle Navigation">☰</button>
     <div class="nav-links" id="navLinks">
       <a href="#announcements">Announcements</a>
-      <a href="#candidates">Nominees (53)</a>
+      <a href="#candidates">The New Board</a>
       <a href="#voting-faq">Voting FAQ</a>
-      <a href="https://electionrunner.com/vote/zOKfm" target="_blank" class="btn btn-gold" style="padding:8px 16px; font-size:13px;">Cast Ballot Online →</a>
     </div>
   </div>
 </nav>
@@ -421,36 +465,42 @@ footer { background: var(--green-deep); color: var(--gold-light); padding: 48px 
       <span class="hero-eyebrow-rule"><span class="rule"></span><span class="eyebrow" style="margin-bottom:0;">Committed to a Transparent, Orderly Election</span></span>
       <h1>53 Candidates Standing for 11 Board Seats</h1>
       <p class="hero-kicker">Serving The Mowbray Community Since 1886</p>
-      <p class="hero-sub">Review candidate platform statements, compare background experience, and access the secure digital voting portal.</p>
-      <div class="hero-actions">
-        <a href="#candidates" class="btn btn-gold">Explore Nominees</a>
-        <a href="https://electionrunner.com/vote/zOKfm" target="_blank" class="btn btn-green-outline" style="color:var(--gold-bright); border-color:var(--gold-main);">Access Voting Portal →</a>
+      <p class="hero-sub">Voting has now closed. We thank every member who took part in this year's election.</p>
+
+      <div class="hero-results-banner">
+        <span class="hero-results-dot"></span>
+        Results of the Top 11 will be released at 10:00 on 28 August 2026
       </div>
 
-      <div class="hero-help-box">
-        <div class="hero-help-header">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16v16H4z"/><path d="M4 6l8 7 8-7"/></svg>
-          Registered Online But Never Received Your Voter Key?
-        </div>
-        <p class="hero-help-lede">This applies if:</p>
-        <ul class="hero-help-list">
-          <li>You registered to vote online before 23 August 2026, 4:00 PM; and</li>
-          <li>Your valid ID or passport number was submitted but no email address was provided, or it was captured incorrectly; or</li>
-          <li>You only provided your date of birth during registration.</li>
-        </ul>
-        <a href="mailto:admin@mcbelections.co.za" class="hero-help-email">
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16v16H4z"/><path d="M4 6l8 7 8-7"/></svg>
-          admin@mcbelections.co.za
-        </a>
-        <p class="hero-help-note">Please include your ID number and email address with your query. If you are enquiring on behalf of someone else, please provide that person's ID number and email address instead of your own, so we can locate the correct record.</p>
+      <div class="hero-actions">
+        <a href="#announcements" class="btn btn-gold">View Official Announcement →</a>
       </div>
     </div>
   </div>
 </header>
 
+<section id="appreciation">
+  <div class="wrap">
+    <div class="section-head center">
+      <span class="eyebrow">With Gratitude</span>
+      <h2>Thank You to Our Independent Panel of Convenors &amp; Electoral Officers</h2>
+      <p style="color:var(--ink-muted);">On behalf of the Mowbray Moslem Cemetery Board, we extend our heartfelt appreciation to the Independent Panel of Convenors and every Electoral Officer for their unwavering commitment to the integrity, fairness, and success of this year's electoral process.</p>
+    </div>
+    <div class="gratitude-grid">
+      <figure class="gratitude-photo">
+        <img src="assets/ipc.jpg" alt="The Independent Panel of Convenors" loading="lazy">
+      </figure>
+      <figure class="gratitude-photo">
+        <img src="assets/team.jpg" alt="Electoral Officers Team" loading="lazy">
+      </figure>
+    </div>
+    <p class="photo-credit">Photography: Anwar Omar</p>
+  </div>
+</section>
+
 <section class="announce-section" id="announcements">
   <div class="wrap announce-inner">
-    <span class="announce-badge"><span class="dot-pulse"></span>Urgent Notice</span>
+    <span class="announce-badge"><span class="dot-pulse"></span>Official Notice</span>
     <div class="announce-body">
       <div class="announce-track" id="announceTrack"></div>
       <div class="announce-controls" id="announceControls">
@@ -468,759 +518,123 @@ footer { background: var(--green-deep); color: var(--gold-light); padding: 48px 
   <section id="candidates">
     <div class="wrap">
       <div class="section-head">
-        <span class="eyebrow">Official Ballot Roster</span>
-        <h2>Full List of Nominees</h2>
-        <p style="color:var(--ink-muted);">In the interest of transparency and an orderly Special General Meeting, all 53 eligible nominees are listed below. Tap a candidate to view their full profile.</p>
+        <span class="eyebrow">The 2026 Board of Convenors</span>
+        <h2>Meet the Newly Elected Board</h2>
+        <p style="color:var(--ink-muted);">The eleven (11) successful candidates elected to serve the Mowbray Moslem Cemetery Board will be published below, alongside their portraits and candidate numbers, following the official results announcement on 28 August 2026 at 10h00.</p>
       </div>
 
-      <div class="search-bar" style="margin-bottom:24px;">
-        <input type="text" id="candidateSearch" placeholder="Search candidates by name..." oninput="filterBySearch(this.value)"
-               style="width:100%; max-width:420px; padding:11px 16px; border:1px solid rgba(22,62,36,0.2); border-radius:8px; font-size:14px; font-family:'Inter',sans-serif;">
-      </div>
-      <div class="ledger-grid" id="candidateGrid">
-      <div class="candidate-card" data-name="abduroaf muneer">
-        <div class="card-top">
-          <div class="photo-frame"><img src="candidates/candidate_01.jpg" alt="Abduroaf Muneer" loading="lazy" onerror="this.outerHTML='&lt;span class=\'photo-placeholder-initials\'&gt;AM&lt;/span&gt;'"></div>
-          <div class="cand-name">
-            <h3 style="cursor:pointer;" onclick="openBio(1)">Abduroaf Muneer</h3>
-            <span class="cand-id">Candidate ID #01</span>
+      <div class="board-grid" id="boardGrid">
+        <div class="board-card">
+          <div class="board-photo-frame">
+            <span class="photo-placeholder-initials">TBA</span>
           </div>
+          <span class="board-seat">Seat 01</span>
+          <h3 class="board-name">Name Pending</h3>
+          <span class="board-id">Candidate ID: TBA</span>
+          <span class="board-badge">Board Member</span>
         </div>
-        <p class="cand-statement" style="">Professor Muneer Abduroaf is an NRF C-rated researcher and Associate Professor of Private Law at UWC, speciali…</p>
-        <div class="card-foot" style="justify-content:flex-end;">
-          <button class="bio-link" onclick="openBio(1)">Full Profile →</button>
-        </div>
-      </div>
 
-      <div class="candidate-card" data-name="abrahams anwar sadat">
-        <div class="card-top">
-          <div class="photo-frame"><img src="candidates/candidate_02.jpg" alt="Abrahams Anwar Sadat" loading="lazy" onerror="this.outerHTML='&lt;span class=\'photo-placeholder-initials\'&gt;AA&lt;/span&gt;'"></div>
-          <div class="cand-name">
-            <h3 style="cursor:pointer;" onclick="openBio(2)">Abrahams Anwar Sadat</h3>
-            <span class="cand-id">Candidate ID #02</span>
+        <div class="board-card">
+          <div class="board-photo-frame">
+            <span class="photo-placeholder-initials">TBA</span>
           </div>
+          <span class="board-seat">Seat 02</span>
+          <h3 class="board-name">Name Pending</h3>
+          <span class="board-id">Candidate ID: TBA</span>
+          <span class="board-badge">Board Member</span>
         </div>
-        <p class="cand-statement" style="">Anwar Sadat Abrahams is a dedicated community leader with over two decades of retail management experience. Th…</p>
-        <div class="card-foot" style="justify-content:flex-end;">
-          <button class="bio-link" onclick="openBio(2)">Full Profile →</button>
-        </div>
-      </div>
 
-      <div class="candidate-card" data-name="abrahams nasief">
-        <div class="card-top">
-          <div class="photo-frame"><img src="candidates/candidate_03.jpg" alt="Abrahams Nasief" loading="lazy" onerror="this.outerHTML='&lt;span class=\'photo-placeholder-initials\'&gt;AN&lt;/span&gt;'"></div>
-          <div class="cand-name">
-            <h3 style="cursor:pointer;" onclick="openBio(3)">Abrahams Nasief</h3>
-            <span class="cand-id">Candidate ID #03</span>
+        <div class="board-card">
+          <div class="board-photo-frame">
+            <span class="photo-placeholder-initials">TBA</span>
           </div>
+          <span class="board-seat">Seat 03</span>
+          <h3 class="board-name">Name Pending</h3>
+          <span class="board-id">Candidate ID: TBA</span>
+          <span class="board-badge">Board Member</span>
         </div>
-        <p class="cand-statement" style="">A former Truth and Reconciliation Commission assistant and experienced sub-editor, Nasief is deeply dedicated…</p>
-        <div class="card-foot" style="justify-content:flex-end;">
-          <button class="bio-link" onclick="openBio(3)">Full Profile →</button>
-        </div>
-      </div>
 
-      <div class="candidate-card" data-name="abrahams nasief">
-        <div class="card-top">
-          <div class="photo-frame"><img src="candidates/candidate_04.jpg" alt="Abrahams Nasief" loading="lazy" onerror="this.outerHTML='&lt;span class=\'photo-placeholder-initials\'&gt;AN&lt;/span&gt;'"></div>
-          <div class="cand-name">
-            <h3 style="cursor:pointer;" onclick="openBio(4)">Abrahams Nasief</h3>
-            <span class="cand-id">Candidate ID #04</span>
+        <div class="board-card">
+          <div class="board-photo-frame">
+            <span class="photo-placeholder-initials">TBA</span>
           </div>
+          <span class="board-seat">Seat 04</span>
+          <h3 class="board-name">Name Pending</h3>
+          <span class="board-id">Candidate ID: TBA</span>
+          <span class="board-badge">Board Member</span>
         </div>
-        <p class="cand-statement" style="">A retired professional with a strong background in medical marketing consultancy and construction. Having grow…</p>
-        <div class="card-foot" style="justify-content:flex-end;">
-          <button class="bio-link" onclick="openBio(4)">Full Profile →</button>
-        </div>
-      </div>
 
-      <div class="candidate-card" data-name="abrahams salmaan">
-        <div class="card-top">
-          <div class="photo-frame"><img src="candidates/candidate_05.jpg" alt="Abrahams Salmaan" loading="lazy" onerror="this.outerHTML='&lt;span class=\'photo-placeholder-initials\'&gt;AS&lt;/span&gt;'"></div>
-          <div class="cand-name">
-            <h3 style="cursor:pointer;" onclick="openBio(5)">Abrahams Salmaan</h3>
-            <span class="cand-id">Candidate ID #05</span>
+        <div class="board-card">
+          <div class="board-photo-frame">
+            <span class="photo-placeholder-initials">TBA</span>
           </div>
+          <span class="board-seat">Seat 05</span>
+          <h3 class="board-name">Name Pending</h3>
+          <span class="board-id">Candidate ID: TBA</span>
+          <span class="board-badge">Board Member</span>
         </div>
-        <p class="cand-statement" style="">Moulana Salmaan Abrahams serves as the First Deputy President of the MJC. As an Islamic scholar and social ent…</p>
-        <div class="card-foot" style="justify-content:flex-end;">
-          <button class="bio-link" onclick="openBio(5)">Full Profile →</button>
-        </div>
-      </div>
 
-      <div class="candidate-card" data-name="adjiet aisa">
-        <div class="card-top">
-          <div class="photo-frame"><img src="candidates/candidate_06.jpg" alt="Adjiet Aisa" loading="lazy" onerror="this.outerHTML='&lt;span class=\'photo-placeholder-initials\'&gt;AA&lt;/span&gt;'"></div>
-          <div class="cand-name">
-            <h3 style="cursor:pointer;" onclick="openBio(6)">Adjiet Aisa</h3>
-            <span class="cand-id">Candidate ID #06</span>
+        <div class="board-card">
+          <div class="board-photo-frame">
+            <span class="photo-placeholder-initials">TBA</span>
           </div>
+          <span class="board-seat">Seat 06</span>
+          <h3 class="board-name">Name Pending</h3>
+          <span class="board-id">Candidate ID: TBA</span>
+          <span class="board-badge">Board Member</span>
         </div>
-        <p class="cand-statement" style="">Aisha Adjiet holds an Honours Degree in Maqasid al-Shari'ah and brings over 15 years of experience in da'wah a…</p>
-        <div class="card-foot" style="justify-content:flex-end;">
-          <button class="bio-link" onclick="openBio(6)">Full Profile →</button>
-        </div>
-      </div>
 
-      <div class="candidate-card" data-name="bardien shaheed">
-        <div class="card-top">
-          <div class="photo-frame"><img src="candidates/candidate_07.jpg" alt="Bardien Shaheed" loading="lazy" onerror="this.outerHTML='&lt;span class=\'photo-placeholder-initials\'&gt;BS&lt;/span&gt;'"></div>
-          <div class="cand-name">
-            <h3 style="cursor:pointer;" onclick="openBio(7)">Bardien Shaheed</h3>
-            <span class="cand-id">Candidate ID #07</span>
+        <div class="board-card">
+          <div class="board-photo-frame">
+            <span class="photo-placeholder-initials">TBA</span>
           </div>
+          <span class="board-seat">Seat 07</span>
+          <h3 class="board-name">Name Pending</h3>
+          <span class="board-id">Candidate ID: TBA</span>
+          <span class="board-badge">Board Member</span>
         </div>
-        <p class="cand-statement" style="">Shaheed currently serves the community as a dedicated administrator at Majlisush Shura Al Islani.</p>
-        <div class="card-foot" style="justify-content:flex-end;">
-          <button class="bio-link" onclick="openBio(7)">Full Profile →</button>
-        </div>
-      </div>
 
-      <div class="candidate-card" data-name="basadien shamiel">
-        <div class="card-top">
-          <div class="photo-frame"><img src="candidates/candidate_08.jpg" alt="Basadien Shamiel" loading="lazy" onerror="this.outerHTML='&lt;span class=\'photo-placeholder-initials\'&gt;BS&lt;/span&gt;'"></div>
-          <div class="cand-name">
-            <h3 style="cursor:pointer;" onclick="openBio(8)">Basadien Shamiel</h3>
-            <span class="cand-id">Candidate ID #08</span>
+        <div class="board-card">
+          <div class="board-photo-frame">
+            <span class="photo-placeholder-initials">TBA</span>
           </div>
+          <span class="board-seat">Seat 08</span>
+          <h3 class="board-name">Name Pending</h3>
+          <span class="board-id">Candidate ID: TBA</span>
+          <span class="board-badge">Board Member</span>
         </div>
-        <p class="cand-statement" style="">A qualified actuary and acting chairman of Mosque Shafee and the Masajid of Bokaap, Shamiel is heavily involve…</p>
-        <div class="card-foot" style="justify-content:flex-end;">
-          <button class="bio-link" onclick="openBio(8)">Full Profile →</button>
-        </div>
-      </div>
 
-      <div class="candidate-card" data-name="bassier faizel">
-        <div class="card-top">
-          <div class="photo-frame"><img src="candidates/candidate_09.jpg" alt="Bassier Faizel" loading="lazy" onerror="this.outerHTML='&lt;span class=\'photo-placeholder-initials\'&gt;BF&lt;/span&gt;'"></div>
-          <div class="cand-name">
-            <h3 style="cursor:pointer;" onclick="openBio(9)">Bassier Faizel</h3>
-            <span class="cand-id">Candidate ID #09</span>
+        <div class="board-card">
+          <div class="board-photo-frame">
+            <span class="photo-placeholder-initials">TBA</span>
           </div>
+          <span class="board-seat">Seat 09</span>
+          <h3 class="board-name">Name Pending</h3>
+          <span class="board-id">Candidate ID: TBA</span>
+          <span class="board-badge">Board Member</span>
         </div>
-        <p class="cand-statement" style="">With practical experience in Janazah preparation, landscaping, and logistics management, Faizel offers the ope…</p>
-        <div class="card-foot" style="justify-content:flex-end;">
-          <button class="bio-link" onclick="openBio(9)">Full Profile →</button>
-        </div>
-      </div>
 
-      <div class="candidate-card" data-name="bassier mohamed majedi">
-        <div class="card-top">
-          <div class="photo-frame"><img src="candidates/candidate_10.jpg" alt="Bassier Mohamed Majedi" loading="lazy" onerror="this.outerHTML='&lt;span class=\'photo-placeholder-initials\'&gt;BM&lt;/span&gt;'"></div>
-          <div class="cand-name">
-            <h3 style="cursor:pointer;" onclick="openBio(10)">Bassier Mohamed Majedi</h3>
-            <span class="cand-id">Candidate ID #10</span>
+        <div class="board-card">
+          <div class="board-photo-frame">
+            <span class="photo-placeholder-initials">TBA</span>
           </div>
+          <span class="board-seat">Seat 10</span>
+          <h3 class="board-name">Name Pending</h3>
+          <span class="board-id">Candidate ID: TBA</span>
+          <span class="board-badge">Board Member</span>
         </div>
-        <p class="cand-statement" style="">A medical doctor and long-standing Boorhaanol Islam Movement executive, Dr. Bassier is a staunch advocate for…</p>
-        <div class="card-foot" style="justify-content:flex-end;">
-          <button class="bio-link" onclick="openBio(10)">Full Profile →</button>
-        </div>
-      </div>
 
-      <div class="candidate-card" data-name="bassier muhammad aadil, dr.">
-        <div class="card-top">
-          <div class="photo-frame"><img src="candidates/candidate_11.jpg" alt="Bassier Muhammad Aadil, Dr." loading="lazy" onerror="this.outerHTML='&lt;span class=\'photo-placeholder-initials\'&gt;BM&lt;/span&gt;'"></div>
-          <div class="cand-name">
-            <h3 style="cursor:pointer;" onclick="openBio(11)">Bassier Muhammad Aadil, Dr.</h3>
-            <span class="cand-id">Candidate ID #11</span>
+        <div class="board-card">
+          <div class="board-photo-frame">
+            <span class="photo-placeholder-initials">TBA</span>
           </div>
+          <span class="board-seat">Seat 11</span>
+          <h3 class="board-name">Name Pending</h3>
+          <span class="board-id">Candidate ID: TBA</span>
+          <span class="board-badge">Board Member</span>
         </div>
-        <p class="cand-statement" style="">Dr. Muhammad Aadil Bassier is a distinguished family physician and the first Muslim doctor in the Western Cape…</p>
-        <div class="card-foot" style="justify-content:flex-end;">
-          <button class="bio-link" onclick="openBio(11)">Full Profile →</button>
-        </div>
-      </div>
 
-      <div class="candidate-card" data-name="bassier tolgah">
-        <div class="card-top">
-          <div class="photo-frame"><img src="candidates/candidate_12.jpg" alt="Bassier Tolgah" loading="lazy" onerror="this.outerHTML='&lt;span class=\'photo-placeholder-initials\'&gt;BT&lt;/span&gt;'"></div>
-          <div class="cand-name">
-            <h3 style="cursor:pointer;" onclick="openBio(12)">Bassier Tolgah</h3>
-            <span class="cand-id">Candidate ID #12</span>
-          </div>
-        </div>
-        <p class="cand-statement" style="">An Islamic scholar who studied Quran under Sheikh Fuat Gabier and Fiqh under Imam Abdurahman Bassier, he is al…</p>
-        <div class="card-foot" style="justify-content:flex-end;">
-          <button class="bio-link" onclick="openBio(12)">Full Profile →</button>
-        </div>
       </div>
-
-      <div class="candidate-card" data-name="canfield yagyah">
-        <div class="card-top">
-          <div class="photo-frame"><img src="candidates/candidate_13.jpg" alt="Canfield Yagyah" loading="lazy" onerror="this.outerHTML='&lt;span class=\'photo-placeholder-initials\'&gt;CY&lt;/span&gt;'"></div>
-          <div class="cand-name">
-            <h3 style="cursor:pointer;" onclick="openBio(13)">Canfield Yagyah</h3>
-            <span class="cand-id">Candidate ID #13</span>
-          </div>
-        </div>
-        <p class="cand-statement" style="">As a professional undertaker, Yagyah brings daily operational experience in burials and logistics, aiming to i…</p>
-        <div class="card-foot" style="justify-content:flex-end;">
-          <button class="bio-link" onclick="openBio(13)">Full Profile →</button>
-        </div>
-      </div>
-
-      <div class="candidate-card" data-name="crombie ebrahim">
-        <div class="card-top">
-          <div class="photo-frame"><img src="candidates/candidate_14.jpg" alt="Crombie Ebrahim" loading="lazy" onerror="this.outerHTML='&lt;span class=\'photo-placeholder-initials\'&gt;CE&lt;/span&gt;'"></div>
-          <div class="cand-name">
-            <h3 style="cursor:pointer;" onclick="openBio(14)">Crombie Ebrahim</h3>
-            <span class="cand-id">Candidate ID #14</span>
-          </div>
-        </div>
-        <p class="cand-statement" style="">A dedicated educator and former maintenance manager with profound expertise in Islamic instruction, Ebrahim br…</p>
-        <div class="card-foot" style="justify-content:flex-end;">
-          <button class="bio-link" onclick="openBio(14)">Full Profile →</button>
-        </div>
-      </div>
-
-      <div class="candidate-card" data-name="crombie luodt">
-        <div class="card-top">
-          <div class="photo-frame"><img src="candidates/candidate_15.jpg" alt="Crombie Luodt" loading="lazy" onerror="this.outerHTML='&lt;span class=\'photo-placeholder-initials\'&gt;CL&lt;/span&gt;'"></div>
-          <div class="cand-name">
-            <h3 style="cursor:pointer;" onclick="openBio(15)">Crombie Luodt</h3>
-            <span class="cand-id">Candidate ID #15</span>
-          </div>
-        </div>
-        <p class="cand-statement" style="">A UWC Science graduate, retired software programmer, and successful entrepreneur, Luodt is also the creator of…</p>
-        <div class="card-foot" style="justify-content:flex-end;">
-          <button class="bio-link" onclick="openBio(15)">Full Profile →</button>
-        </div>
-      </div>
-
-      <div class="candidate-card" data-name="da silva mauro nunes mendes">
-        <div class="card-top">
-          <div class="photo-frame"><img src="candidates/candidate_16.jpg" alt="Da Silva Mauro Nunes Mendes" loading="lazy" onerror="this.outerHTML='&lt;span class=\'photo-placeholder-initials\'&gt;DS&lt;/span&gt;'"></div>
-          <div class="cand-name">
-            <h3 style="cursor:pointer;" onclick="openBio(16)">Da Silva Mauro Nunes Mendes</h3>
-            <span class="cand-id">Candidate ID #16</span>
-          </div>
-        </div>
-        <p class="cand-statement" style="">An international business development leader, Mauro offers extensive experience in governance, strategic plann…</p>
-        <div class="card-foot" style="justify-content:flex-end;">
-          <button class="bio-link" onclick="openBio(16)">Full Profile →</button>
-        </div>
-      </div>
-
-      <div class="candidate-card" data-name="dalwai yusuf khan">
-        <div class="card-top">
-          <div class="photo-frame"><img src="candidates/candidate_17.jpg" alt="Dalwai Yusuf Khan" loading="lazy" onerror="this.outerHTML='&lt;span class=\'photo-placeholder-initials\'&gt;DY&lt;/span&gt;'"></div>
-          <div class="cand-name">
-            <h3 style="cursor:pointer;" onclick="openBio(17)">Dalwai Yusuf Khan</h3>
-            <span class="cand-id">Candidate ID #17</span>
-          </div>
-        </div>
-        <p class="cand-statement" style="">Advocate Dalwai is a practicing High Court Advocate and Chairperson of the Cape Mazaar Society, bringing excep…</p>
-        <div class="card-foot" style="justify-content:flex-end;">
-          <button class="bio-link" onclick="openBio(17)">Full Profile →</button>
-        </div>
-      </div>
-
-      <div class="candidate-card" data-name="davids mogamat">
-        <div class="card-top">
-          <div class="photo-frame"><img src="candidates/candidate_18.jpg" alt="Davids Mogamat" loading="lazy" onerror="this.outerHTML='&lt;span class=\'photo-placeholder-initials\'&gt;DM&lt;/span&gt;'"></div>
-          <div class="cand-name">
-            <h3 style="cursor:pointer;" onclick="openBio(18)">Davids Mogamat</h3>
-            <span class="cand-id">Candidate ID #18</span>
-          </div>
-        </div>
-        <p class="cand-statement" style="font-style:italic; opacity:0.7;">Biography pending.</p>
-        <div class="card-foot" style="justify-content:flex-end;">
-          <button class="bio-link" onclick="openBio(18)">Full Profile →</button>
-        </div>
-      </div>
-
-      <div class="candidate-card" data-name="davids mogamat salih">
-        <div class="card-top">
-          <div class="photo-frame"><img src="candidates/candidate_19.jpg" alt="Davids Mogamat Salih" loading="lazy" onerror="this.outerHTML='&lt;span class=\'photo-placeholder-initials\'&gt;DM&lt;/span&gt;'"></div>
-          <div class="cand-name">
-            <h3 style="cursor:pointer;" onclick="openBio(19)">Davids Mogamat Salih</h3>
-            <span class="cand-id">Candidate ID #19</span>
-          </div>
-        </div>
-        <p class="cand-statement" style="">A former anti-Apartheid activist and retired government official, Mogamat remains deeply involved in heritage…</p>
-        <div class="card-foot" style="justify-content:flex-end;">
-          <button class="bio-link" onclick="openBio(19)">Full Profile →</button>
-        </div>
-      </div>
-
-      <div class="candidate-card" data-name="davids phaldie">
-        <div class="card-top">
-          <div class="photo-frame"><img src="candidates/candidate_20.jpg" alt="Davids Phaldie" loading="lazy" onerror="this.outerHTML='&lt;span class=\'photo-placeholder-initials\'&gt;DP&lt;/span&gt;'"></div>
-          <div class="cand-name">
-            <h3 style="cursor:pointer;" onclick="openBio(20)">Davids Phaldie</h3>
-            <span class="cand-id">Candidate ID #20</span>
-          </div>
-        </div>
-        <p class="cand-statement" style="">With over 25 years in law enforcement and disaster management, Phaldie offers critical expertise in safety pro…</p>
-        <div class="card-foot" style="justify-content:flex-end;">
-          <button class="bio-link" onclick="openBio(20)">Full Profile →</button>
-        </div>
-      </div>
-
-      <div class="candidate-card" data-name="davids riyadh">
-        <div class="card-top">
-          <div class="photo-frame"><img src="candidates/candidate_21.jpg" alt="Davids Riyadh" loading="lazy" onerror="this.outerHTML='&lt;span class=\'photo-placeholder-initials\'&gt;DR&lt;/span&gt;'"></div>
-          <div class="cand-name">
-            <h3 style="cursor:pointer;" onclick="openBio(21)">Davids Riyadh</h3>
-            <span class="cand-id">Candidate ID #21</span>
-          </div>
-        </div>
-        <p class="cand-statement" style="">An experienced humanitarian worker and facilities manager, Riyadh expertly combines international corporate go…</p>
-        <div class="card-foot" style="justify-content:flex-end;">
-          <button class="bio-link" onclick="openBio(21)">Full Profile →</button>
-        </div>
-      </div>
-
-      <div class="candidate-card" data-name="davids sadiyah">
-        <div class="card-top">
-          <div class="photo-frame"><img src="candidates/candidate_22.jpg" alt="Davids Sadiyah" loading="lazy" onerror="this.outerHTML='&lt;span class=\'photo-placeholder-initials\'&gt;DS&lt;/span&gt;'"></div>
-          <div class="cand-name">
-            <h3 style="cursor:pointer;" onclick="openBio(22)">Davids Sadiyah</h3>
-            <span class="cand-id">Candidate ID #22</span>
-          </div>
-        </div>
-        <p class="cand-statement" style="">A passionate madrasah teacher and community organizer with practical financial administration experience, Sadi…</p>
-        <div class="card-foot" style="justify-content:flex-end;">
-          <button class="bio-link" onclick="openBio(22)">Full Profile →</button>
-        </div>
-      </div>
-
-      <div class="candidate-card" data-name="dejongh nazeem">
-        <div class="card-top">
-          <div class="photo-frame"><img src="candidates/candidate_23.jpg" alt="Dejongh Nazeem" loading="lazy" onerror="this.outerHTML='&lt;span class=\'photo-placeholder-initials\'&gt;DN&lt;/span&gt;'"></div>
-          <div class="cand-name">
-            <h3 style="cursor:pointer;" onclick="openBio(23)">Dejongh Nazeem</h3>
-            <span class="cand-id">Candidate ID #23</span>
-          </div>
-        </div>
-        <p class="cand-statement" style="">Having served five years as a Supervisor at Mowbray Cemetery, Nazeem provides unmatched practical expertise in…</p>
-        <div class="card-foot" style="justify-content:flex-end;">
-          <button class="bio-link" onclick="openBio(23)">Full Profile →</button>
-        </div>
-      </div>
-
-      <div class="candidate-card" data-name="fataar riad">
-        <div class="card-top">
-          <div class="photo-frame"><img src="candidates/candidate_24.jpg" alt="Fataar Riad" loading="lazy" onerror="this.outerHTML='&lt;span class=\'photo-placeholder-initials\'&gt;FR&lt;/span&gt;'"></div>
-          <div class="cand-name">
-            <h3 style="cursor:pointer;" onclick="openBio(24)">Fataar Riad</h3>
-            <span class="cand-id">Candidate ID #24</span>
-          </div>
-        </div>
-        <p class="cand-statement" style="">Sheikh Riad Fataar, President of the MJC, is a distinguished scholar and advocate who has tirelessly champione…</p>
-        <div class="card-foot" style="justify-content:flex-end;">
-          <button class="bio-link" onclick="openBio(24)">Full Profile →</button>
-        </div>
-      </div>
-
-      <div class="candidate-card" data-name="fransman aqeel">
-        <div class="card-top">
-          <div class="photo-frame"><img src="candidates/candidate_25.jpg" alt="Fransman Aqeel" loading="lazy" onerror="this.outerHTML='&lt;span class=\'photo-placeholder-initials\'&gt;FA&lt;/span&gt;'"></div>
-          <div class="cand-name">
-            <h3 style="cursor:pointer;" onclick="openBio(25)">Fransman Aqeel</h3>
-            <span class="cand-id">Candidate ID #25</span>
-          </div>
-        </div>
-        <p class="cand-statement" style="">Founder of the Aqeel Fransman Foundation, Aqeel turned personal adversity into a powerful mission to feed the…</p>
-        <div class="card-foot" style="justify-content:flex-end;">
-          <button class="bio-link" onclick="openBio(25)">Full Profile →</button>
-        </div>
-      </div>
-
-      <div class="candidate-card" data-name="gamiet faizel">
-        <div class="card-top">
-          <div class="photo-frame"><img src="candidates/candidate_26.jpg" alt="Gamiet Faizel" loading="lazy" onerror="this.outerHTML='&lt;span class=\'photo-placeholder-initials\'&gt;GF&lt;/span&gt;'"></div>
-          <div class="cand-name">
-            <h3 style="cursor:pointer;" onclick="openBio(26)">Gamiet Faizel</h3>
-            <span class="cand-id">Candidate ID #26</span>
-          </div>
-        </div>
-        <p class="cand-statement" style="">A site foreman and frequent visitor to the Maqbarah, Faizel brings a practical construction background and a g…</p>
-        <div class="card-foot" style="justify-content:flex-end;">
-          <button class="bio-link" onclick="openBio(26)">Full Profile →</button>
-        </div>
-      </div>
-
-      <div class="candidate-card" data-name="garda muhammad shakeel">
-        <div class="card-top">
-          <div class="photo-frame"><img src="candidates/candidate_27.jpg" alt="Garda Muhammad Shakeel" loading="lazy" onerror="this.outerHTML='&lt;span class=\'photo-placeholder-initials\'&gt;GM&lt;/span&gt;'"></div>
-          <div class="cand-name">
-            <h3 style="cursor:pointer;" onclick="openBio(27)">Garda Muhammad Shakeel</h3>
-            <span class="cand-id">Candidate ID #27</span>
-          </div>
-        </div>
-        <p class="cand-statement" style="">A 30-year-old attorney, radio presenter, researcher and community organiser, Muhammad Shakeel served as the Pr…</p>
-        <div class="card-foot" style="justify-content:flex-end;">
-          <button class="bio-link" onclick="openBio(27)">Full Profile →</button>
-        </div>
-      </div>
-
-      <div class="candidate-card" data-name="george yaseen">
-        <div class="card-top">
-          <div class="photo-frame"><img src="candidates/candidate_28.jpg" alt="George Yaseen" loading="lazy" onerror="this.outerHTML='&lt;span class=\'photo-placeholder-initials\'&gt;GY&lt;/span&gt;'"></div>
-          <div class="cand-name">
-            <h3 style="cursor:pointer;" onclick="openBio(28)">George Yaseen</h3>
-            <span class="cand-id">Candidate ID #28</span>
-          </div>
-        </div>
-        <p class="cand-statement" style="">With 37 years at Somerset Hospital administering death and medico-legal cases, Yaseen brings profound expertis…</p>
-        <div class="card-foot" style="justify-content:flex-end;">
-          <button class="bio-link" onclick="openBio(28)">Full Profile →</button>
-        </div>
-      </div>
-
-      <div class="candidate-card" data-name="girie siraaj">
-        <div class="card-top">
-          <div class="photo-frame"><img src="candidates/candidate_29.jpg" alt="Girie Siraaj" loading="lazy" onerror="this.outerHTML='&lt;span class=\'photo-placeholder-initials\'&gt;GS&lt;/span&gt;'"></div>
-          <div class="cand-name">
-            <h3 style="cursor:pointer;" onclick="openBio(29)">Girie Siraaj</h3>
-            <span class="cand-id">Candidate ID #29</span>
-          </div>
-        </div>
-        <p class="cand-statement" style="">Moulana Siraaj serves in the MJC Fatwa Department and as a Systems Coordinator. He brings solid theological sc…</p>
-        <div class="card-foot" style="justify-content:flex-end;">
-          <button class="bio-link" onclick="openBio(29)">Full Profile →</button>
-        </div>
-      </div>
-
-      <div class="candidate-card" data-name="hayat abdul rezah">
-        <div class="card-top">
-          <div class="photo-frame"><img src="candidates/candidate_30.jpg" alt="Hayat Abdul Rezah" loading="lazy" onerror="this.outerHTML='&lt;span class=\'photo-placeholder-initials\'&gt;HA&lt;/span&gt;'"></div>
-          <div class="cand-name">
-            <h3 style="cursor:pointer;" onclick="openBio(30)">Hayat Abdul Rezah</h3>
-            <span class="cand-id">Candidate ID #30</span>
-          </div>
-        </div>
-        <p class="cand-statement" style="">A high school educator with 35 years of experience, Abdul Rezah maintains strong community relations and provi…</p>
-        <div class="card-foot" style="justify-content:flex-end;">
-          <button class="bio-link" onclick="openBio(30)">Full Profile →</button>
-        </div>
-      </div>
-
-      <div class="candidate-card" data-name="hendricks nadeem">
-        <div class="card-top">
-          <div class="photo-frame"><img src="candidates/candidate_31.jpg" alt="Hendricks Nadeem" loading="lazy" onerror="this.outerHTML='&lt;span class=\'photo-placeholder-initials\'&gt;HN&lt;/span&gt;'"></div>
-          <div class="cand-name">
-            <h3 style="cursor:pointer;" onclick="openBio(31)">Hendricks Nadeem</h3>
-            <span class="cand-id">Candidate ID #31</span>
-          </div>
-        </div>
-        <p class="cand-statement" style="">A retired principal and lifelong activist, Nadeem fights for social justice and serves the poor through feedin…</p>
-        <div class="card-foot" style="justify-content:flex-end;">
-          <button class="bio-link" onclick="openBio(31)">Full Profile →</button>
-        </div>
-      </div>
-
-      <div class="candidate-card" data-name="jakoet aboubakar">
-        <div class="card-top">
-          <div class="photo-frame"><img src="candidates/candidate_32.jpg" alt="Jakoet Aboubakar" loading="lazy" onerror="this.outerHTML='&lt;span class=\'photo-placeholder-initials\'&gt;JA&lt;/span&gt;'"></div>
-          <div class="cand-name">
-            <h3 style="cursor:pointer;" onclick="openBio(32)">Jakoet Aboubakar</h3>
-            <span class="cand-id">Candidate ID #32</span>
-          </div>
-        </div>
-        <p class="cand-statement" style="">A Chartered Accountant and former CFO with extensive board experience on the JSE, Aboubakar brings top-tier fi…</p>
-        <div class="card-foot" style="justify-content:flex-end;">
-          <button class="bio-link" onclick="openBio(32)">Full Profile →</button>
-        </div>
-      </div>
-
-      <div class="candidate-card" data-name="jassiem mogamat ashraf">
-        <div class="card-top">
-          <div class="photo-frame"><img src="candidates/candidate_33.jpg" alt="Jassiem Mogamat Ashraf" loading="lazy" onerror="this.outerHTML='&lt;span class=\'photo-placeholder-initials\'&gt;JM&lt;/span&gt;'"></div>
-          <div class="cand-name">
-            <h3 style="cursor:pointer;" onclick="openBio(33)">Jassiem Mogamat Ashraf</h3>
-            <span class="cand-id">Candidate ID #33</span>
-          </div>
-        </div>
-        <p class="cand-statement" style="">Having served on the Nur el Houda Masjid executive for over 25 years, Ashraf has proven his long-term commitme…</p>
-        <div class="card-foot" style="justify-content:flex-end;">
-          <button class="bio-link" onclick="openBio(33)">Full Profile →</button>
-        </div>
-      </div>
-
-      <div class="candidate-card" data-name="kamedien mogamat ganief">
-        <div class="card-top">
-          <div class="photo-frame"><img src="candidates/candidate_34.jpg" alt="Kamedien Mogamat Ganief" loading="lazy" onerror="this.outerHTML='&lt;span class=\'photo-placeholder-initials\'&gt;KM&lt;/span&gt;'"></div>
-          <div class="cand-name">
-            <h3 style="cursor:pointer;" onclick="openBio(34)">Kamedien Mogamat Ganief</h3>
-            <span class="cand-id">Candidate ID #34</span>
-          </div>
-        </div>
-        <p class="cand-statement" style="">A retired public sector manager and heritage activist, Ganief has decades of experience in facilities manageme…</p>
-        <div class="card-foot" style="justify-content:flex-end;">
-          <button class="bio-link" onclick="openBio(34)">Full Profile →</button>
-        </div>
-      </div>
-
-      <div class="candidate-card" data-name="khan gamiem">
-        <div class="card-top">
-          <div class="photo-frame"><img src="candidates/candidate_35.jpg" alt="Khan Gamiem" loading="lazy" onerror="this.outerHTML='&lt;span class=\'photo-placeholder-initials\'&gt;KG&lt;/span&gt;'"></div>
-          <div class="cand-name">
-            <h3 style="cursor:pointer;" onclick="openBio(35)">Khan Gamiem</h3>
-            <span class="cand-id">Candidate ID #35</span>
-          </div>
-        </div>
-        <p class="cand-statement" style="">An engineering company director and active community member, Gamiem has deep ties to Bo-Kaap traditions and ex…</p>
-        <div class="card-foot" style="justify-content:flex-end;">
-          <button class="bio-link" onclick="openBio(35)">Full Profile →</button>
-        </div>
-      </div>
-
-      <div class="candidate-card" data-name="khan yasmin">
-        <div class="card-top">
-          <div class="photo-frame"><img src="candidates/candidate_36.jpg" alt="Khan Yasmin" loading="lazy" onerror="this.outerHTML='&lt;span class=\'photo-placeholder-initials\'&gt;KY&lt;/span&gt;'"></div>
-          <div class="cand-name">
-            <h3 style="cursor:pointer;" onclick="openBio(36)">Khan Yasmin</h3>
-            <span class="cand-id">Candidate ID #36</span>
-          </div>
-        </div>
-        <p class="cand-statement" style="">An attorney and former district prosecutor, Yasmin is a passionate humanitarian and family law expert dedicate…</p>
-        <div class="card-foot" style="justify-content:flex-end;">
-          <button class="bio-link" onclick="openBio(36)">Full Profile →</button>
-        </div>
-      </div>
-
-      <div class="candidate-card" data-name="lee ebrahim">
-        <div class="card-top">
-          <div class="photo-frame"><img src="candidates/candidate_37.jpg" alt="Lee Ebrahim" loading="lazy" onerror="this.outerHTML='&lt;span class=\'photo-placeholder-initials\'&gt;LE&lt;/span&gt;'"></div>
-          <div class="cand-name">
-            <h3 style="cursor:pointer;" onclick="openBio(37)">Lee Ebrahim</h3>
-            <span class="cand-id">Candidate ID #37</span>
-          </div>
-        </div>
-        <p class="cand-statement" style="">A qualified Alim, Ebrahim possesses over 25 years of hands-on experience in teaching and executing Janazah rit…</p>
-        <div class="card-foot" style="justify-content:flex-end;">
-          <button class="bio-link" onclick="openBio(37)">Full Profile →</button>
-        </div>
-      </div>
-
-      <div class="candidate-card" data-name="malick nabeweya">
-        <div class="card-top">
-          <div class="photo-frame"><img src="candidates/candidate_38.jpg" alt="Malick Nabeweya" loading="lazy" onerror="this.outerHTML='&lt;span class=\'photo-placeholder-initials\'&gt;MN&lt;/span&gt;'"></div>
-          <div class="cand-name">
-            <h3 style="cursor:pointer;" onclick="openBio(38)">Malick Nabeweya</h3>
-            <span class="cand-id">Candidate ID #38</span>
-          </div>
-        </div>
-        <p class="cand-statement" style="">A versatile media professional and women's rights advocate, Nabeweya brings vast public relations experience,…</p>
-        <div class="card-foot" style="justify-content:flex-end;">
-          <button class="bio-link" onclick="openBio(38)">Full Profile →</button>
-        </div>
-      </div>
-
-      <div class="candidate-card" data-name="mohamed ayub">
-        <div class="card-top">
-          <div class="photo-frame"><img src="candidates/candidate_39.jpg" alt="Mohamed Ayub" loading="lazy" onerror="this.outerHTML='&lt;span class=\'photo-placeholder-initials\'&gt;MA&lt;/span&gt;'"></div>
-          <div class="cand-name">
-            <h3 style="cursor:pointer;" onclick="openBio(39)">Mohamed Ayub</h3>
-            <span class="cand-id">Candidate ID #39</span>
-          </div>
-        </div>
-        <p class="cand-statement" style="">A seasoned public sector manager in environmental planning, Ayub has been instrumental in digitizing Mowbray C…</p>
-        <div class="card-foot" style="justify-content:flex-end;">
-          <button class="bio-link" onclick="openBio(39)">Full Profile →</button>
-        </div>
-      </div>
-
-      <div class="candidate-card" data-name="mohamed mohamed uzair">
-        <div class="card-top">
-          <div class="photo-frame"><img src="candidates/candidate_40.jpg" alt="Mohamed Mohamed Uzair" loading="lazy" onerror="this.outerHTML='&lt;span class=\'photo-placeholder-initials\'&gt;MM&lt;/span&gt;'"></div>
-          <div class="cand-name">
-            <h3 style="cursor:pointer;" onclick="openBio(40)">Mohamed Mohamed Uzair</h3>
-            <span class="cand-id">Candidate ID #40</span>
-          </div>
-        </div>
-        <p class="cand-statement" style="">Founder of Cape Town Intifada, Uzair is a dedicated grassroots activist focused on social justice, anti-aparth…</p>
-        <div class="card-foot" style="justify-content:flex-end;">
-          <button class="bio-link" onclick="openBio(40)">Full Profile →</button>
-        </div>
-      </div>
-
-      <div class="candidate-card" data-name="moosa khasifa">
-        <div class="card-top">
-          <div class="photo-frame"><img src="candidates/candidate_41.jpg" alt="Moosa Khasifa" loading="lazy" onerror="this.outerHTML='&lt;span class=\'photo-placeholder-initials\'&gt;MK&lt;/span&gt;'"></div>
-          <div class="cand-name">
-            <h3 style="cursor:pointer;" onclick="openBio(41)">Moosa Khasifa</h3>
-            <span class="cand-id">Candidate ID #41</span>
-          </div>
-        </div>
-        <p class="cand-statement" style="">A telecommunications operations manager and co-founder of the Green Dome Institute, Kashiefa excels in strateg…</p>
-        <div class="card-foot" style="justify-content:flex-end;">
-          <button class="bio-link" onclick="openBio(41)">Full Profile →</button>
-        </div>
-      </div>
-
-      <div class="candidate-card" data-name="parker munier">
-        <div class="card-top">
-          <div class="photo-frame"><img src="candidates/candidate_42.jpg" alt="Parker Munier" loading="lazy" onerror="this.outerHTML='&lt;span class=\'photo-placeholder-initials\'&gt;PM&lt;/span&gt;'"></div>
-          <div class="cand-name">
-            <h3 style="cursor:pointer;" onclick="openBio(42)">Parker Munier</h3>
-            <span class="cand-id">Candidate ID #42</span>
-          </div>
-        </div>
-        <p class="cand-statement" style="">An acclaimed filmmaker and community advocate, Munier leverages over 30 years in media to preserve Cape Muslim…</p>
-        <div class="card-foot" style="justify-content:flex-end;">
-          <button class="bio-link" onclick="openBio(42)">Full Profile →</button>
-        </div>
-      </div>
-
-      <div class="candidate-card" data-name="peters anwar">
-        <div class="card-top">
-          <div class="photo-frame"><img src="candidates/candidate_43.jpg" alt="Peters Anwar" loading="lazy" onerror="this.outerHTML='&lt;span class=\'photo-placeholder-initials\'&gt;PA&lt;/span&gt;'"></div>
-          <div class="cand-name">
-            <h3 style="cursor:pointer;" onclick="openBio(43)">Peters Anwar</h3>
-            <span class="cand-id">Candidate ID #43</span>
-          </div>
-        </div>
-        <p class="cand-statement" style="">Anwar is a progressive community activist strongly committed to driving positive social change and upliftment.</p>
-        <div class="card-foot" style="justify-content:flex-end;">
-          <button class="bio-link" onclick="openBio(43)">Full Profile →</button>
-        </div>
-      </div>
-
-      <div class="candidate-card" data-name="petersen abdud daiyaan">
-        <div class="card-top">
-          <div class="photo-frame"><img src="candidates/candidate_44.jpg" alt="Petersen Abdud Daiyaan" loading="lazy" onerror="this.outerHTML='&lt;span class=\'photo-placeholder-initials\'&gt;PA&lt;/span&gt;'"></div>
-          <div class="cand-name">
-            <h3 style="cursor:pointer;" onclick="openBio(44)">Petersen Abdud Daiyaan</h3>
-            <span class="cand-id">Candidate ID #44</span>
-          </div>
-        </div>
-        <p class="cand-statement" style="">An honours graduate in Environmental Science and an archival researcher, Abdud-Daiyaan is dedicated to uncover…</p>
-        <div class="card-foot" style="justify-content:flex-end;">
-          <button class="bio-link" onclick="openBio(44)">Full Profile →</button>
-        </div>
-      </div>
-
-      <div class="candidate-card" data-name="salie shameemah">
-        <div class="card-top">
-          <div class="photo-frame"><img src="candidates/candidate_45.jpg" alt="Salie Shameemah" loading="lazy" onerror="this.outerHTML='&lt;span class=\'photo-placeholder-initials\'&gt;SS&lt;/span&gt;'"></div>
-          <div class="cand-name">
-            <h3 style="cursor:pointer;" onclick="openBio(45)">Salie Shameemah</h3>
-            <span class="cand-id">Candidate ID #45</span>
-          </div>
-        </div>
-        <p class="cand-statement" style="">Advocate Shameemah Salie is a City Councillor with nearly 30 years in law and public administration, bringing…</p>
-        <div class="card-foot" style="justify-content:flex-end;">
-          <button class="bio-link" onclick="openBio(45)">Full Profile →</button>
-        </div>
-      </div>
-
-      <div class="candidate-card" data-name="salie zaid">
-        <div class="card-top">
-          <div class="photo-frame"><img src="candidates/candidate_46.jpg" alt="Salie Zaid" loading="lazy" onerror="this.outerHTML='&lt;span class=\'photo-placeholder-initials\'&gt;SZ&lt;/span&gt;'"></div>
-          <div class="cand-name">
-            <h3 style="cursor:pointer;" onclick="openBio(46)">Salie Zaid</h3>
-            <span class="cand-id">Candidate ID #46</span>
-          </div>
-        </div>
-        <p class="cand-statement" style="">An IT professional with over 30 years of experience, Zaid is poised to modernize the cemetery's digital infras…</p>
-        <div class="card-foot" style="justify-content:flex-end;">
-          <button class="bio-link" onclick="openBio(46)">Full Profile →</button>
-        </div>
-      </div>
-
-      <div class="candidate-card" data-name="sampson khaalid">
-        <div class="card-top">
-          <div class="photo-frame"><img src="candidates/candidate_47.jpg" alt="Sampson Khaalid" loading="lazy" onerror="this.outerHTML='&lt;span class=\'photo-placeholder-initials\'&gt;SK&lt;/span&gt;'"></div>
-          <div class="cand-name">
-            <h3 style="cursor:pointer;" onclick="openBio(47)">Sampson Khaalid</h3>
-            <span class="cand-id">Candidate ID #47</span>
-          </div>
-        </div>
-        <p class="cand-statement" style="">An educational administrator, Khalid specializes in institutional operations, logistics management, and mainta…</p>
-        <div class="card-foot" style="justify-content:flex-end;">
-          <button class="bio-link" onclick="openBio(47)">Full Profile →</button>
-        </div>
-      </div>
-
-      <div class="candidate-card" data-name="satardien sha shaheed">
-        <div class="card-top">
-          <div class="photo-frame"><img src="candidates/candidate_48.jpg" alt="Satardien Sha Shaheed" loading="lazy" onerror="this.outerHTML='&lt;span class=\'photo-placeholder-initials\'&gt;SS&lt;/span&gt;'"></div>
-          <div class="cand-name">
-            <h3 style="cursor:pointer;" onclick="openBio(48)">Satardien Sha Shaheed</h3>
-            <span class="cand-id">Candidate ID #48</span>
-          </div>
-        </div>
-        <p class="cand-statement" style="">A highly educated scholar holding three PhDs in World Peace, Shariah, and Sociology, offering profound theolog…</p>
-        <div class="card-foot" style="justify-content:flex-end;">
-          <button class="bio-link" onclick="openBio(48)">Full Profile →</button>
-        </div>
-      </div>
-
-      <div class="candidate-card" data-name="sayed faizal">
-        <div class="card-top">
-          <div class="photo-frame"><img src="candidates/candidate_49.jpg" alt="Sayed Faizal" loading="lazy" onerror="this.outerHTML='&lt;span class=\'photo-placeholder-initials\'&gt;SF&lt;/span&gt;'"></div>
-          <div class="cand-name">
-            <h3 style="cursor:pointer;" onclick="openBio(49)">Sayed Faizal</h3>
-            <span class="cand-id">Candidate ID #49</span>
-          </div>
-        </div>
-        <p class="cand-statement" style="">A distinguished broadcaster and law student, Faizal has spearheaded the modernization of cemetery administrati…</p>
-        <div class="card-foot" style="justify-content:flex-end;">
-          <button class="bio-link" onclick="openBio(49)">Full Profile →</button>
-        </div>
-      </div>
-
-      <div class="candidate-card" data-name="schroeder mogamat ameen">
-        <div class="card-top">
-          <div class="photo-frame"><img src="candidates/candidate_50.jpg" alt="Schroeder Mogamat Ameen" loading="lazy" onerror="this.outerHTML='&lt;span class=\'photo-placeholder-initials\'&gt;SM&lt;/span&gt;'"></div>
-          <div class="cand-name">
-            <h3 style="cursor:pointer;" onclick="openBio(50)">Schroeder Mogamat Ameen</h3>
-            <span class="cand-id">Candidate ID #50</span>
-          </div>
-        </div>
-        <p class="cand-statement" style="">With 28 years as a registered undertaker, Ameen provides invaluable hands-on expertise in funeral services and…</p>
-        <div class="card-foot" style="justify-content:flex-end;">
-          <button class="bio-link" onclick="openBio(50)">Full Profile →</button>
-        </div>
-      </div>
-
-      <div class="candidate-card" data-name="sofejan mu'aweeya">
-        <div class="card-top">
-          <div class="photo-frame"><img src="candidates/candidate_51.jpg" alt="Sofejan Mu'Aweeya" loading="lazy" onerror="this.outerHTML='&lt;span class=\'photo-placeholder-initials\'&gt;SM&lt;/span&gt;'"></div>
-          <div class="cand-name">
-            <h3 style="cursor:pointer;" onclick="openBio(51)">Sofejan Mu'Aweeya</h3>
-            <span class="cand-id">Candidate ID #51</span>
-          </div>
-        </div>
-        <p class="cand-statement" style="">Founder of Mu'aweeya's Burial Service, he brings over 40 years of dedicated Toekamani experience, serving fami…</p>
-        <div class="card-foot" style="justify-content:flex-end;">
-          <button class="bio-link" onclick="openBio(51)">Full Profile →</button>
-        </div>
-      </div>
-
-      <div class="candidate-card" data-name="solomon igshaan">
-        <div class="card-top">
-          <div class="photo-frame"><img src="candidates/candidate_52.jpg" alt="Solomon Igshaan" loading="lazy" onerror="this.outerHTML='&lt;span class=\'photo-placeholder-initials\'&gt;SI&lt;/span&gt;'"></div>
-          <div class="cand-name">
-            <h3 style="cursor:pointer;" onclick="openBio(52)">Solomon Igshaan</h3>
-            <span class="cand-id">Candidate ID #52</span>
-          </div>
-        </div>
-        <p class="cand-statement" style="">An Islamic University of Madinah graduate and long-serving Imam, Igshaan offers deep knowledge of burial laws…</p>
-        <div class="card-foot" style="justify-content:flex-end;">
-          <button class="bio-link" onclick="openBio(52)">Full Profile →</button>
-        </div>
-      </div>
-
-      <div class="candidate-card" data-name="west muhammad">
-        <div class="card-top">
-          <div class="photo-frame"><img src="candidates/candidate_53.jpg" alt="West Muhammad" loading="lazy" onerror="this.outerHTML='&lt;span class=\'photo-placeholder-initials\'&gt;WM&lt;/span&gt;'"></div>
-          <div class="cand-name">
-            <h3 style="cursor:pointer;" onclick="openBio(53)">West Muhammad</h3>
-            <span class="cand-id">Candidate ID #53</span>
-          </div>
-        </div>
-        <p class="cand-statement" style="">Sheikh Muhammad West is a Chartered Accountant and Treasurer of the MJC. He provides exemplary financial leade…</p>
-        <div class="card-foot" style="justify-content:flex-end;">
-          <button class="bio-link" onclick="openBio(53)">Full Profile →</button>
-        </div>
-      </div>
-</div>
-      <p id="noResults" style="display:none; color:var(--ink-muted); text-align:center; padding:32px 0;">No candidates match your search.</p>
     </div>
   </section>
 
@@ -1336,10 +750,6 @@ footer { background: var(--green-deep); color: var(--gold-light); padding: 48px 
   </section>
 </main>
 
-<div class="bio-overlay" id="bioOverlay">
-  <div class="bio-panel" id="bioPanel"></div>
-</div>
-
 <footer>
   <div class="wrap">
     <div class="footer-grid">
@@ -1358,108 +768,6 @@ footer { background: var(--green-deep); color: var(--gold-light); padding: 48px 
 </footer>
 
 <script>
-const CANDIDATES = [
-  { name: "Abduroaf Muneer", bio: "Professor Muneer Abduroaf is an NRF C-rated researcher and Associate Professor of Private Law at UWC, specializing in Islamic and Family Law. An admitted Attorney, Sworn Translator, and MJC Executive Council Member, he bridges academic scholarship, constitutional governance, and community leadership." },
-  { name: "Abrahams Anwar Sadat", bio: "Anwar Sadat Abrahams is a dedicated community leader with over two decades of retail management experience. Through his media platform, A&S Productions, he passionately highlights community issues, local history, and meaningful discourse." },
-  { name: "Abrahams Nasief", bio: "A former Truth and Reconciliation Commission assistant and experienced sub-editor, Nasief is deeply dedicated to transparency, accountability, and preserving Muslim heritage." },
-  { name: "Abrahams Nasief", bio: "A retired professional with a strong background in medical marketing consultancy and construction. Having grown up in District Six, he maintains a deep family connection to the Mowbray Maqbarah." },
-  { name: "Abrahams Salmaan", bio: "Moulana Salmaan Abrahams serves as the First Deputy President of the MJC. As an Islamic scholar and social entrepreneur, he brings rich experience in community advancement and youth development." },
-  { name: "Adjiet Aisa", bio: "Aisha Adjiet holds an Honours Degree in Maqasid al-Shari'ah and brings over 15 years of experience in da'wah and community service. She currently serves IPSA in executive administration and student wellness." },
-  { name: "Bardien Shaheed", bio: "Shaheed currently serves the community as a dedicated administrator at Majlisush Shura Al Islani." },
-  { name: "Basadien Shamiel", bio: "A qualified actuary and acting chairman of Mosque Shafee and the Masajid of Bokaap, Shamiel is heavily involved in both community services and financial governance." },
-  { name: "Bassier Faizel", bio: "With practical experience in Janazah preparation, landscaping, and logistics management, Faizel offers the operational leadership and facility management skills essential for meticulous cemetery maintenance." },
-  { name: "Bassier Mohamed Majedi", bio: "A medical doctor and long-standing Boorhaanol Islam Movement executive, Dr. Bassier is a staunch advocate for good governance, absolute accountability, and legal compliance at the Mowbray Maqbarah." },
-  { name: "Bassier Muhammad Aadil, Dr.", bio: "Dr. Muhammad Aadil Bassier is a distinguished family physician and the first Muslim doctor in the Western Cape to earn a Master's Degree in Family Medicine. With decades in general practice in Belhar, he chairs the Tana Baru Trust, vice-chairs the Pinelands Muslim Association, and has championed good governance at the Mowbray Maqbarah since 2016." },
-  { name: "Bassier Tolgah", bio: "An Islamic scholar who studied Quran under Sheikh Fuat Gabier and Fiqh under Imam Abdurahman Bassier, he is also a medical doctor with an MBChB, LLB and PLT. As the sole applicant, he successfully stopped the proposed morgue at Mowbray Maqbara." },
-  { name: "Canfield Yagyah", bio: "As a professional undertaker, Yagyah brings daily operational experience in burials and logistics, aiming to improve cemetery administration with transparency, dignity, and compassion." },
-  { name: "Crombie Ebrahim", bio: "A dedicated educator and former maintenance manager with profound expertise in Islamic instruction, Ebrahim brings strong organizational and youth development skills to the community." },
-  { name: "Crombie Luodt", bio: "A UWC Science graduate, retired software programmer, and successful entrepreneur, Luodt is also the creator of the Uwatch neighborhood watch and an active community builder." },
-  { name: "Da Silva Mauro Nunes Mendes", bio: "An international business development leader, Mauro offers extensive experience in governance, strategic planning, and financial stewardship, dedicated entirely to restoring trust and accountability to the cemetery." },
-  { name: "Dalwai Yusuf Khan", bio: "Advocate Dalwai is a practicing High Court Advocate and Chairperson of the Cape Mazaar Society, bringing exceptional legal, governance, and heritage preservation expertise." },
-  { name: "Davids Mogamat", bio: "" },
-  { name: "Davids Mogamat Salih", bio: "A former anti-Apartheid activist and retired government official, Mogamat remains deeply involved in heritage and cultural preservation as Life President of Keep The Dream." },
-  { name: "Davids Phaldie", bio: "With over 25 years in law enforcement and disaster management, Phaldie offers critical expertise in safety protocols, operational planning, and community governance." },
-  { name: "Davids Riyadh", bio: "An experienced humanitarian worker and facilities manager, Riyadh expertly combines international corporate governance knowledge with a passion for serving the indigent." },
-  { name: "Davids Sadiyah", bio: "A passionate madrasah teacher and community organizer with practical financial administration experience, Sadiyah brings a generational connection and strong commitment to Mowbray Cemetery." },
-  { name: "Dejongh Nazeem", bio: "Having served five years as a Supervisor at Mowbray Cemetery, Nazeem provides unmatched practical expertise in burial administration and on-the-ground cemetery operations." },
-  { name: "Fataar Riad", bio: "Sheikh Riad Fataar, President of the MJC, is a distinguished scholar and advocate who has tirelessly championed the protection, development, and availability of Muslim cemetery land." },
-  { name: "Fransman Aqeel", bio: "Founder of the Aqeel Fransman Foundation, Aqeel turned personal adversity into a powerful mission to feed the needy, becoming a beacon of compassionate leadership in Mitchell's Plain." },
-  { name: "Gamiet Faizel", bio: "A site foreman and frequent visitor to the Maqbarah, Faizel brings a practical construction background and a grounded community perspective to the board." },
-  { name: "Garda Muhammad Shakeel", bio: "A 30-year-old attorney, radio presenter, researcher and community organiser, Muhammad Shakeel served as the President of the MSA Union 2019-2021, is a fellow of the Auwal Socio Economic Research Institute (ASRI), has served AWQAF in various capacities and recently served UUCSA's voter registration campaign. He has an interest in cemeteries and is eager to serve the maqbarah with dignity." },
-  { name: "George Yaseen", bio: "With 37 years at Somerset Hospital administering death and medico-legal cases, Yaseen brings profound expertise in handling post-mortems and providing guidance to grieving families." },
-  { name: "Girie Siraaj", bio: "Moulana Siraaj serves in the MJC Fatwa Department and as a Systems Coordinator. He brings solid theological scholarship and rigorous institutional administrative skills." },
-  { name: "Hayat Abdul Rezah", bio: "A high school educator with 35 years of experience, Abdul Rezah maintains strong community relations and provides invaluable guidance to people striving to fulfill their dreams." },
-  { name: "Hendricks Nadeem", bio: "A retired principal and lifelong activist, Nadeem fights for social justice and serves the poor through feeding schemes and community organizations in Thornton." },
-  { name: "Jakoet Aboubakar", bio: "A Chartered Accountant and former CFO with extensive board experience on the JSE, Aboubakar brings top-tier financial oversight and corporate governance acumen." },
-  { name: "Jassiem Mogamat Ashraf", bio: "Having served on the Nur el Houda Masjid executive for over 25 years, Ashraf has proven his long-term commitment to community stewardship and institutional maintenance." },
-  { name: "Kamedien Mogamat Ganief", bio: "A retired public sector manager and heritage activist, Ganief has decades of experience in facilities management and preserving Cape Muslim history and archives." },
-  { name: "Khan Gamiem", bio: "An engineering company director and active community member, Gamiem has deep ties to Bo-Kaap traditions and extensive experience in the practical handling of Janazah rites." },
-  { name: "Khan Yasmin", bio: "An attorney and former district prosecutor, Yasmin is a passionate humanitarian and family law expert dedicated to serving vulnerable communities with unyielding integrity." },
-  { name: "Lee Ebrahim", bio: "A qualified Alim, Ebrahim possesses over 25 years of hands-on experience in teaching and executing Janazah rites across various communities." },
-  { name: "Malick Nabeweya", bio: "A versatile media professional and women's rights advocate, Nabeweya brings vast public relations experience, having served as PRO for the MJC and Voice of the Cape." },
-  { name: "Mohamed Ayub", bio: "A seasoned public sector manager in environmental planning, Ayub has been instrumental in digitizing Mowbray Cemetery records and ensuring its legal and environmental compliance." },
-  { name: "Mohamed Mohamed Uzair", bio: "Founder of Cape Town Intifada, Uzair is a dedicated grassroots activist focused on social justice, anti-apartheid advocacy, and practical community support." },
-  { name: "Moosa Khasifa", bio: "A telecommunications operations manager and co-founder of the Green Dome Institute, Kashiefa excels in strategic coordination, youth development, and driving sustainable social impact." },
-  { name: "Parker Munier", bio: "An acclaimed filmmaker and community advocate, Munier leverages over 30 years in media to preserve Cape Muslim heritage and build strategic organizational partnerships." },
-  { name: "Peters Anwar", bio: "Anwar is a progressive community activist strongly committed to driving positive social change and upliftment." },
-  { name: "Petersen Abdud Daiyaan", bio: "An honours graduate in Environmental Science and an archival researcher, Abdud-Daiyaan is dedicated to uncovering and preserving the rich heritage of Cape Muslim society." },
-  { name: "Salie Shameemah", bio: "Advocate Shameemah Salie is a City Councillor with nearly 30 years in law and public administration, bringing strategic oversight and robust governance to cemetery management." },
-  { name: "Salie Zaid", bio: "An IT professional with over 30 years of experience, Zaid is poised to modernize the cemetery's digital infrastructure, cybersecurity, and financial transparency." },
-  { name: "Sampson Khaalid", bio: "An educational administrator, Khalid specializes in institutional operations, logistics management, and maintaining rigorous accountability systems." },
-  { name: "Satardien Sha Shaheed", bio: "A highly educated scholar holding three PhDs in World Peace, Shariah, and Sociology, offering profound theological and cultural perspectives to governance." },
-  { name: "Sayed Faizal", bio: "A distinguished broadcaster and law student, Faizal has spearheaded the modernization of cemetery administration, advancing systems and policies that ease the burden on grieving families." },
-  { name: "Schroeder Mogamat Ameen", bio: "With 28 years as a registered undertaker, Ameen provides invaluable hands-on expertise in funeral services and highly compassionate community support." },
-  { name: "Sofejan Mu'Aweeya", bio: "Founder of Mu'aweeya's Burial Service, he brings over 40 years of dedicated Toekamani experience, serving families with dignity, pride, and deep compassion." },
-  { name: "Solomon Igshaan", bio: "An Islamic University of Madinah graduate and long-serving Imam, Igshaan offers deep knowledge of burial laws and a lifelong, unwavering commitment to the Mowbray community." },
-  { name: "West Muhammad", bio: "Sheikh Muhammad West is a Chartered Accountant and Treasurer of the MJC. He provides exemplary financial leadership and academic rigor to various local and international community institutions." }
-].map((c, i) => ({
-  id: i + 1,
-  name: c.name,
-  initials: c.name.split(' ').filter(Boolean).map(w => w[0]).slice(0, 2).join('').toUpperCase(),
-  photo: `candidates/candidate_${String(i + 1).padStart(2, '0')}.jpg`,
-  bio: c.bio
-}));
-
-function truncate(text, max) {
-  return text.length > max ? text.slice(0, max).trim() + "…" : text;
-}
-
-// Candidate cards are pre-rendered as static HTML (see #candidateGrid) so all
-// names and bio previews are present in the page source for search engines.
-// This just shows/hides the existing cards — it never rebuilds them.
-function filterBySearch(value) {
-  const term = value.trim().toLowerCase();
-  const cards = document.querySelectorAll('#candidateGrid .candidate-card');
-  let visibleCount = 0;
-  cards.forEach(card => {
-    const match = card.dataset.name.includes(term);
-    card.style.display = match ? '' : 'none';
-    if (match) visibleCount++;
-  });
-  document.getElementById('noResults').style.display = visibleCount === 0 ? '' : 'none';
-}
-
-function openBio(id) {
-  const c = CANDIDATES.find(x => x.id === id);
-  const panel = document.getElementById('bioPanel');
-  const photoHTML = c.photo 
-    ? `<img src="${c.photo}" alt="${c.name}" onerror="this.outerHTML='<span class=\\'photo-placeholder-initials\\' style=\\'font-size:32px;\\'>${c.initials}</span>'">` 
-    : `<span class="photo-placeholder-initials" style="font-size:32px;">${c.initials}</span>`;
-
-  panel.innerHTML = `
-    <div style="text-align:center; margin-bottom:20px;">
-      <div class="bio-photo-frame">${photoHTML}</div>
-      <h2 style="color:var(--green-deep); margin-bottom:4px; font-size:20px;">${c.name}</h2>
-      <span style="color:var(--gold-main); font-weight:700; font-size:13px;">Candidate #${String(c.id).padStart(2,'0')}</span>
-    </div>
-    <p style="margin:16px 0; font-size:14.5px; color:var(--ink-muted); line-height:1.6; ${c.bio ? '' : 'font-style:italic; opacity:0.7;'}">${c.bio || 'Biography pending — check back closer to the election date.'}</p>
-    <button class="btn btn-gold" onclick="closeBio()" style="width:100%; justify-content:center;">Close Profile</button>
-  `;
-  document.getElementById('bioOverlay').classList.add('show');
-}
-
-function closeBio() { document.getElementById('bioOverlay').classList.remove('show'); }
-
 document.getElementById('navToggle').addEventListener('click', () => {
   document.getElementById('navLinks').classList.toggle('open');
 });
@@ -1471,50 +779,15 @@ document.getElementById('navToggle').addEventListener('click', () => {
    a sensible floor/ceiling so nothing is either instant or endless. */
 const ANNOUNCEMENTS = [
   {
-    title: "Urgent Release: Extension of Voting Assistance",
+    title: "Official Announcement: Mowbray Moslem Cemetery Board Election Results",
     paragraphs: [
-      "25 August 2026",
-      "The Independent Panel of Convenors has received a significant number of requests for assistance from registered members who experienced difficulties obtaining their voter identification details.",
-      "Accordingly, the following relief measures are hereby implemented:",
-      "Eligibility: Registered members who appear on the membership list as of 16:00 on Sunday, 23 August 2026, and who submitted a request for a voter ID by no later than 17:00 today, Tuesday, 25 August 2026, will be assisted.",
-      "Voting Extension: Members who receive their voter keys after the 17:00 cut-off time will have two hours from the time of receipt to cast their vote.",
-      "Example: If a voter key is received at 17:15, the member will have until 19:15 to vote. Thereafter, the voter key will expire and will no longer be valid.",
-      "Important Note: To be clear, the voting period is not extended to a fixed time of 19:00 for everyone. Rather, it is extended on a sliding scale - each qualifying voter receives a personalised two-hour window commencing from the moment their key is issued.",
-      "Chairperson, Mr I Higgins, Independent Panel of Convenors — 25 August 2026, 16:37"
-    ]
-  },
-  {
-    title: "Notice: Extension of Voting Period",
-    paragraphs: [
-      "Voting commenced at 10h00 on Sunday, 23 August 2026, in person and online. Physical voting concluded on 23 August 2026 at 16:00.",
-      "Following the commencement of voting, the Panel received queries from certain registered members who indicated that they had not received their unique voter identification details timeously and were consequently unable to cast their votes online.",
-      "In light of these technical challenges, and in order to ensure that all eligible registered members are afforded a reasonable opportunity to participate in the election, the Panel has resolved to extend the online voting period until 17h00 on Tuesday, 25 August 2026.",
-      "The extension is necessary to: (a) enable the IT technician to investigate and resolve the technical challenges experienced by certain members; and (b) provide registered members who were unable to vote online with a further opportunity to cast their votes.",
-      "1. For the avoidance of doubt, the extended online voting period applies only to members who were registered by the applicable cut-off time. It does not constitute an extension of the membership registration period.",
-      "2. No further membership applications will be accepted after 16h00 on Sunday, 23 August 2026.",
-      "3. The Panel appreciates the patience and cooperation of all members while these issues are being addressed and remains committed to ensuring that the electoral process is conducted fairly, transparently and efficiently."
-    ]
-  },
-  {
-    title: "Important Update Notice to All Voters",
-    paragraphs: [
-      "Assalaamu Alaikum, Esteemed Voters,",
-      "We are writing to provide a clear and important update regarding the distribution of voter IDs and voting access keys.",
-      "For those who registered using a valid South African ID or passport number and provided a correct email address - rest assured, your voting credentials will be delivered to your inbox no later than 10:00 AM on 23 August 2026, when voting officially opens.",
-      "To uphold the security and integrity of our online electoral process, we must enforce strict verification standards.",
-      "Consequently, members who registered without a valid ID/passport number, or without a valid email address, cannot be verified through our online system.",
-      "This includes those who provided only a cell phone number without an email address - unfortunately, these members will not receive digital voting credentials.",
-      "However, we have not left you without a voice. To ensure you can still exercise your democratic right, these members are warmly invited to cast their ballots in person at the Castle of Good Hope.",
-      "We remain fully committed to guaranteeing that every eligible voter has a fair and accessible opportunity to participate, and we thank you for your cooperation in protecting the credibility of this election."
-    ]
-  },
-  {
-    title: "Important Notice Regarding Electronic Voting",
-    paragraphs: [
-      "Members who registered to vote electronically were required to provide accurate and complete information to enable the verification of their eligibility and the issuing of electronic voting credentials.",
-      "The Panel of Independent Convenors cannot accept responsibility for the non-delivery of voter identification credentials or voting keys where this results from inaccurate, incorrect or incomplete information supplied during the registration process.",
-      "If you registered for electronic voting but have not received your voter identification credentials and voting key by 22 August 2026, you are encouraged to vote in person on Sunday, 23 August 2026. Your eligibility to vote will be verified at the voting venue in accordance with the applicable electoral requirements.",
-      "The absence of electronic voting credentials does not, in itself, mean that a person is ineligible to vote."
+      "We are pleased to formally announce the results of the recent election for the Mowbray Moslem Cemetery Board.",
+      "The official outcome, confirming the eleven (11) successful candidates, will be released on:",
+      "28 August 2026 at 10h00",
+      "All community members, stakeholders, and interested parties are respectfully invited to take note of this significant announcement.",
+      "Our sincere appreciation goes to each nominee for their willingness to serve our community, and to every participant whose engagement and commitment upheld the integrity of this electoral process.",
+      "Issued by the Independent Electoral Panel of Convenors",
+      "Chairperson: Mr I Higgins"
     ]
   }
 ];
